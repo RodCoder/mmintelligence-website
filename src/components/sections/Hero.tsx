@@ -14,7 +14,7 @@ export function Hero(): JSX.Element {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   const handleRequestAccess = () => {
-    const el = document.getElementById('invitation');
+    const el = document.getElementById('contact');
     if (el)
     el.scrollIntoView({
       behavior: 'smooth'
@@ -89,7 +89,6 @@ export function Hero(): JSX.Element {
           style={{
             fontFamily: "'Inter', sans-serif",
             fontSize: '11px',
-            fontWeight: 300,
             letterSpacing: '0.38em',
             color: 'rgba(201,168,76,0.85)',
             textTransform: 'uppercase',
@@ -97,7 +96,20 @@ export function Hero(): JSX.Element {
             display: 'block'
           }}>
 
-          KINARI
+          <span
+            style={{
+              fontWeight: 500
+            }}>
+
+            MM
+          </span>{' '}
+          <span
+            style={{
+              fontWeight: 300
+            }}>
+
+            INTELLIGENCE
+          </span>
         </span>
 
         {/* Main headline */}
@@ -113,7 +125,8 @@ export function Hero(): JSX.Element {
             maxWidth: '820px'
           }}>
 
-          Where serious capital meets serious projects.
+          Technical Intelligence for Digital Asset Governance and Institutional
+          Risk
         </h1>
 
         {/* Subline */}
@@ -123,17 +136,21 @@ export function Hero(): JSX.Element {
             fontSize: '15px',
             fontWeight: 300,
             color: 'rgba(245,242,238,0.5)',
-            letterSpacing: '0.1em',
+            letterSpacing: '0.05em',
             marginBottom: '56px',
-            textTransform: 'uppercase'
+            maxWidth: '700px',
+            lineHeight: 1.6
           }}>
 
-          Institutional real estate. On-chain ownership. By invitation.
+          MM Intelligence provides forensic analysis, privacy architecture and
+          technical governance capabilities supporting legal advisory,
+          institutional decision-making and the secure deployment of complex
+          digital wealth.
         </p>
 
         {/* CTA */}
         <button className="kinari-btn" onClick={handleRequestAccess}>
-          Request Access
+          Discuss a Mandate
         </button>
       </div>
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { KinariLanding } from './pages/KinariLanding';
+import { MMIntelligencePage } from './pages/MMIntelligencePage';
 export function App(): JSX.Element {
-  return <KinariLanding />;
+  return <MMIntelligencePage />;
 }

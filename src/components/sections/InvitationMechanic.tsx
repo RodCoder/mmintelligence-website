@@ -1,17 +1,23 @@
 import React, { useState } from 'react';
 export function InvitationMechanic(): JSX.Element {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (email.trim()) {
+    if (email.trim() && name.trim()) {
       setSubmitted(true);
-      console.log('Application submitted:', email);
+      console.log('Enquiry submitted:', {
+        name,
+        email,
+        message
+      });
     }
   };
   return (
     <section
-      id="invitation"
+      id="contact"
       style={{
         backgroundColor: '#0A0A0A',
         padding: '160px 0',
@@ -40,7 +46,7 @@ export function InvitationMechanic(): JSX.Element {
             display: 'block'
           }}>
 
-          Access
+          Contact
         </span>
 
         <h2
@@ -54,7 +60,7 @@ export function InvitationMechanic(): JSX.Element {
             marginBottom: '28px'
           }}>
 
-          Kinari is not open to the public.
+          Discuss a Mandate
         </h2>
 
         <p
@@ -68,9 +74,9 @@ export function InvitationMechanic(): JSX.Element {
             margin: '0 auto 48px'
           }}>
 
-          Access is extended by invitation or through a reviewed application. If
-          you represent qualified capital or a development project of
-          institutional scale, you may submit your details for consideration.
+          If you represent a family office, institutional client or professional
+          adviser requiring structured technical intelligence for digital asset
+          governance, we welcome your enquiry.
         </p>
 
         {!submitted ?
@@ -79,8 +85,16 @@ export function InvitationMechanic(): JSX.Element {
           style={{
             display: 'flex',
             flexDirection: 'column',
-            gap: '12px'
+            gap: '16px'
           }}>
+
+            <input
+            type="text"
+            className="kinari-input"
+            placeholder="Your name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required />
 
             <input
             type="email"
@@ -90,15 +104,26 @@ export function InvitationMechanic(): JSX.Element {
             onChange={(e) => setEmail(e.target.value)}
             required />
 
+            <textarea
+            className="kinari-input"
+            placeholder="Message (optional)"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            rows={4}
+            style={{
+              resize: 'none'
+            }} />
+
             <button
             type="submit"
             className="kinari-btn"
             style={{
               width: '100%',
-              textAlign: 'center'
+              textAlign: 'center',
+              marginTop: '8px'
             }}>
 
-              Submit for Review
+              Submit Enquiry
             </button>
           </form> :
 
@@ -118,7 +143,7 @@ export function InvitationMechanic(): JSX.Element {
               letterSpacing: '0.02em'
             }}>
 
-              Your application has been received.
+              Your enquiry has been received.
             </p>
             <p
             style={{
@@ -130,24 +155,10 @@ export function InvitationMechanic(): JSX.Element {
               letterSpacing: '0.05em'
             }}>
 
-              We will be in contact if your profile meets our current criteria.
+              We will respond within two business days.
             </p>
           </div>
         }
-
-        <p
-          style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: '11px',
-            fontWeight: 300,
-            color: 'rgba(245,242,238,0.22)',
-            marginTop: '20px',
-            lineHeight: 1.6
-          }}>
-
-          Submission does not guarantee access. All applications are reviewed
-          individually.
-        </p>
       </div>
     </section>);
 

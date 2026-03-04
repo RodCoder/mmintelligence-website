@@ -1,30 +1,22 @@
 import React from 'react';
-const metrics = [
-{
-  value: '€2.4B+',
-  label: 'Development value assessed'
-},
-{
-  value: '34',
-  label: 'Projects reviewed to date'
-},
-{
-  value: '12',
-  label: 'Jurisdictions covered'
-}];
-
-const partners = [
-'Strategic Partner',
-'Legal Counsel',
-'Custodian',
-'Regulator',
-'Auditor'];
+const audiences = [
+'Family Offices',
+'High Net-Worth and Ultra High Net-Worth Individuals',
+'Legal and Professional Advisers',
+'Institutional Counterparties'];
 
 export function TrustSignals(): JSX.Element {
+  const handleRequestAccess = () => {
+    const el = document.getElementById('contact');
+    if (el)
+    el.scrollIntoView({
+      behavior: 'smooth'
+    });
+  };
   return (
     <section
       style={{
-        backgroundColor: '#0A0A0A',
+        backgroundColor: '#0d0d0d',
         padding: '112px 0',
         borderTop: '1px solid rgba(245,242,238,0.06)'
       }}>
@@ -39,117 +31,91 @@ export function TrustSignals(): JSX.Element {
         <div
           data-reveal
           style={{
-            marginBottom: '72px'
+            marginBottom: '72px',
+            textAlign: 'center'
           }}>
 
-          <span className="section-label">Standing</span>
+          <span
+            className="section-label"
+            style={{
+              textAlign: 'center'
+            }}>
+
+            Designed for Complex Institutional Environments
+          </span>
         </div>
 
-        {/* Metrics */}
+        {/* Audience Grid */}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
+            gridTemplateColumns: 'repeat(4, 1fr)',
             gap: '1px',
             background: 'rgba(245,242,238,0.06)',
-            marginBottom: '72px'
+            marginBottom: '96px'
           }}>
 
-          {metrics.map((metric, i) =>
+          {audiences.map((audience, i) =>
           <div
             key={i}
+            className="glass-panel"
             style={{
               background: '#0A0A0A',
-              padding: '48px 40px',
+              padding: '48px 32px',
               display: 'flex',
-              flexDirection: 'column',
-              gap: '12px'
+              alignItems: 'center',
+              justifyContent: 'center',
+              textAlign: 'center',
+              minHeight: '180px'
             }}
             data-reveal
             data-reveal-delay={`${i * 100}` as any}>
 
               <span
               style={{
-                fontFamily: "'Cormorant Garamond', Georgia, serif",
-                fontSize: 'clamp(48px, 5vw, 72px)',
-                fontWeight: 300,
-                color: '#F5F2EE',
-                lineHeight: 1,
-                letterSpacing: '-0.02em'
-              }}>
-
-                {metric.value}
-              </span>
-              <span
-              style={{
                 fontFamily: "'Inter', sans-serif",
-                fontSize: '11px',
+                fontSize: '13px',
                 fontWeight: 300,
-                letterSpacing: '0.18em',
-                textTransform: 'uppercase',
-                color: 'rgba(245,242,238,0.35)'
+                letterSpacing: '0.05em',
+                color: 'rgba(245,242,238,0.85)',
+                lineHeight: 1.6
               }}>
 
-                {metric.label}
+                {audience}
               </span>
             </div>
           )}
         </div>
 
-        {/* Partner logos */}
+        {/* Closing Statement */}
         <div
           style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(5, 1fr)',
-            gap: '1px',
-            background: 'rgba(245,242,238,0.06)',
-            marginBottom: '56px'
-          }}
-          data-reveal>
-
-          {partners.map((partner, i) =>
-          <div
-            key={i}
-            className="logo-placeholder"
-            style={{
-              background: '#0A0A0A',
-              height: '80px'
-            }}>
-
-              <span
-              style={{
-                fontFamily: "'Inter', sans-serif",
-                fontSize: '9px',
-                fontWeight: 300,
-                letterSpacing: '0.22em',
-                textTransform: 'uppercase',
-                color: 'rgba(245,242,238,0.18)'
-              }}>
-
-                {partner}
-              </span>
-            </div>
-          )}
-        </div>
-
-        {/* Compliance note */}
-        <p
-          style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: '11px',
-            fontWeight: 300,
-            color: 'rgba(245,242,238,0.28)',
-            lineHeight: 1.7,
             textAlign: 'center',
-            maxWidth: '600px',
+            maxWidth: '700px',
             margin: '0 auto'
           }}
           data-reveal>
 
-          Kinari operates under applicable securities regulations in each
-          jurisdiction of operation. All investments involve risk. Access is
-          restricted to qualified investors as defined by applicable law.
-        </p>
+          <p
+            style={{
+              fontFamily: "'Cormorant Garamond', Georgia, serif",
+              fontSize: 'clamp(24px, 3vw, 32px)',
+              fontWeight: 300,
+              color: '#F5F2EE',
+              lineHeight: 1.4,
+              letterSpacing: '-0.01em',
+              marginBottom: '48px'
+            }}>
+
+            Our role is to create structured technical intelligence that enables
+            digital asset environments to become governable, defensible and
+            operational within institutional frameworks.
+          </p>
+
+          <button className="kinari-btn" onClick={handleRequestAccess}>
+            Discuss a Mandate
+          </button>
+        </div>
       </div>
     </section>);
 

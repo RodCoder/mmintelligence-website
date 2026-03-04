@@ -1,109 +1,32 @@
 import React from 'react';
-interface Step {
+interface FrameworkItem {
   number: string;
-  text: string;
+  title: string;
+  body: string;
 }
-interface StepColumnProps {
-  label: string;
-  steps: Step[];
-  side: 'left' | 'right';
-}
-function StepColumn({ label, steps, side }: StepColumnProps): JSX.Element {
-  return (
-    <div
-      className={side === 'left' ? 'track-divider' : ''}
-      style={{
-        padding: '0 56px'
-      }}
-      data-reveal
-      data-reveal-delay={side === 'right' ? '150' : '0'}>
+const frameworkItems: FrameworkItem[] = [
+{
+  number: '01',
+  title: 'Legal-first engagement context',
+  body: 'Technical intelligence is developed to support structured legal and governance frameworks. Our work contributes factual analysis that may be integrated into legal advisory delivered independently by EU-qualified lawyers where appropriate.'
+},
+{
+  number: '02',
+  title: 'Proprietary methodology',
+  body: 'We apply an internal methodology combining forensic analysis, risk modelling and governance architecture to translate complex digital activity into structured intelligence suitable for institutional decision-making.'
+},
+{
+  number: '03',
+  title: 'Peer review and professional oversight',
+  body: 'Significant engagements follow internal review processes to ensure analytical rigour, consistency and reliability of technical findings.'
+},
+{
+  number: '04',
+  title: 'Controlled data environments',
+  body: 'All analysis is conducted within secure, privacy-first environments designed to minimise unnecessary data exposure and maintain strict operational confidentiality.'
+}];
 
-      <span
-        className="section-label"
-        style={{
-          marginBottom: '40px'
-        }}>
-
-        {label}
-      </span>
-
-      {steps.map((step, i) =>
-      <div key={i} className="step-item">
-          <div
-          style={{
-            display: 'flex',
-            alignItems: 'flex-start',
-            gap: '24px'
-          }}>
-
-            <span
-            style={{
-              fontFamily: "'Cormorant Garamond', Georgia, serif",
-              fontSize: '42px',
-              fontWeight: 300,
-              color: 'rgba(201,168,76,0.28)',
-              lineHeight: 1,
-              flexShrink: 0,
-              minWidth: '52px'
-            }}>
-
-              {step.number}
-            </span>
-            <p
-            style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: '14px',
-              fontWeight: 300,
-              color: 'rgba(245,242,238,0.65)',
-              lineHeight: 1.75,
-              paddingTop: '8px'
-            }}>
-
-              {step.text}
-            </p>
-          </div>
-        </div>
-      )}
-    </div>);
-
-}
 export function HowItWorks(): JSX.Element {
-  const investorSteps: Step[] = [
-  {
-    number: '01',
-    text: 'Submit your investor profile for review. Qualification is assessed against applicable regulatory standards.'
-  },
-  {
-    number: '02',
-    text: 'Receive curated project allocations matched to your mandate, risk profile, and capital horizon.'
-  },
-  {
-    number: '03',
-    text: 'Review deal documentation and commit capital on-chain through the Kinari infrastructure.'
-  },
-  {
-    number: '04',
-    text: 'Monitor your portfolio in real time and access secondary liquidity as it becomes available.'
-  }];
-
-  const developerSteps: Step[] = [
-  {
-    number: '01',
-    text: 'Submit your project for initial assessment. Preliminary review completed within five business days.'
-  },
-  {
-    number: '02',
-    text: "Complete due diligence and compliance onboarding with Kinari's specialist team."
-  },
-  {
-    number: '03',
-    text: "Structure your token offering with Kinari's infrastructure and legal framework."
-  },
-  {
-    number: '04',
-    text: 'Launch to qualified investors and close your capital raise through a managed process.'
-  }];
-
   return (
     <section
       style={{
@@ -113,19 +36,27 @@ export function HowItWorks(): JSX.Element {
 
       <div
         style={{
-          maxWidth: '1200px',
-          margin: '0 auto'
+          maxWidth: '800px',
+          margin: '0 auto',
+          padding: '0 56px'
         }}>
 
         {/* Header */}
         <div
           style={{
-            padding: '0 56px',
-            marginBottom: '80px'
+            marginBottom: '80px',
+            textAlign: 'center'
           }}
           data-reveal>
 
-          <span className="section-label">The Process</span>
+          <span
+            className="section-label"
+            style={{
+              textAlign: 'center'
+            }}>
+
+            Professional Framework
+          </span>
           <h2
             style={{
               fontFamily: "'Cormorant Garamond', Georgia, serif",
@@ -136,28 +67,71 @@ export function HowItWorks(): JSX.Element {
               letterSpacing: '-0.025em'
             }}>
 
-            Structured for precision.
+            Structured for clarity, consistency and confidentiality.
           </h2>
         </div>
 
-        {/* Two columns */}
+        {/* Single column steps */}
         <div
           style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: 0
+            display: 'flex',
+            flexDirection: 'column'
           }}>
 
-          <StepColumn
-            label="Investor Track"
-            steps={investorSteps}
-            side="left" />
+          {frameworkItems.map((item, i) =>
+          <div
+            key={i}
+            className="step-item"
+            style={{
+              display: 'flex',
+              alignItems: 'flex-start',
+              gap: '32px',
+              paddingTop: '40px',
+              paddingBottom: '40px'
+            }}
+            data-reveal
+            data-reveal-delay={`${i * 100}` as any}>
 
-          <StepColumn
-            label="Developer Track"
-            steps={developerSteps}
-            side="right" />
+              <span
+              style={{
+                fontFamily: "'Cormorant Garamond', Georgia, serif",
+                fontSize: '48px',
+                fontWeight: 300,
+                color: 'rgba(201,168,76,0.28)',
+                lineHeight: 1,
+                flexShrink: 0,
+                minWidth: '60px'
+              }}>
 
+                {item.number}
+              </span>
+              <div>
+                <h4
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: '16px',
+                  fontWeight: 400,
+                  color: '#F5F2EE',
+                  marginBottom: '12px',
+                  paddingTop: '8px'
+                }}>
+
+                  {item.title}
+                </h4>
+                <p
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: '15px',
+                  fontWeight: 300,
+                  color: 'rgba(245,242,238,0.65)',
+                  lineHeight: 1.75
+                }}>
+
+                  {item.body}
+                </p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </section>);

@@ -31,13 +31,25 @@ export function FooterSection(): JSX.Element {
             style={{
               fontFamily: "'Inter', sans-serif",
               fontSize: '13px',
-              fontWeight: 300,
               letterSpacing: '0.32em',
               color: 'rgba(245,242,238,0.35)',
               textTransform: 'uppercase'
             }}>
 
-            KINARI
+            <span
+              style={{
+                fontWeight: 500
+              }}>
+
+              MM
+            </span>{' '}
+            <span
+              style={{
+                fontWeight: 300
+              }}>
+
+              INTELLIGENCE
+            </span>
           </span>
 
           {/* Legal links */}
@@ -48,36 +60,34 @@ export function FooterSection(): JSX.Element {
               alignItems: 'center'
             }}>
 
-            {['Privacy Policy', 'Terms of Use', 'Regulatory Disclosures'].map(
-              (link) =>
-              <a
-                key={link}
-                href="#"
-                style={{
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: '11px',
-                  fontWeight: 300,
-                  letterSpacing: '0.1em',
-                  color: 'rgba(245,242,238,0.22)',
-                  textDecoration: 'none',
-                  transition: 'color 0.3s ease'
-                }}
-                onMouseEnter={(e) => {
-                  ;(e.target as HTMLAnchorElement).style.color =
-                  'rgba(245,242,238,0.5)';
-                }}
-                onMouseLeave={(e) => {
-                  ;(e.target as HTMLAnchorElement).style.color =
-                  'rgba(245,242,238,0.22)';
-                }}>
+            {['Privacy Policy', 'Terms of Use'].map((link) =>
+            <a
+              key={link}
+              href="#"
+              style={{
+                fontFamily: "'Inter', sans-serif",
+                fontSize: '11px',
+                fontWeight: 300,
+                letterSpacing: '0.1em',
+                color: 'rgba(245,242,238,0.22)',
+                textDecoration: 'none',
+                transition: 'color 0.3s ease'
+              }}
+              onMouseEnter={(e) => {
+                ;(e.target as HTMLAnchorElement).style.color =
+                'rgba(245,242,238,0.5)';
+              }}
+              onMouseLeave={(e) => {
+                ;(e.target as HTMLAnchorElement).style.color =
+                'rgba(245,242,238,0.22)';
+              }}>
 
-                  {link}
-                </a>
-
+                {link}
+              </a>
             )}
           </nav>
 
-          {/* LinkedIn only */}
+          {/* MMLaw link */}
           <a
             href="#"
             style={{
@@ -98,7 +108,7 @@ export function FooterSection(): JSX.Element {
               'rgba(245,242,238,0.22)';
             }}>
 
-            LinkedIn
+            Legal Advisory: MMLaw
           </a>
         </div>
 
@@ -112,27 +122,61 @@ export function FooterSection(): JSX.Element {
 
 
         {/* Legal disclaimer */}
-        <p
+        <div
           style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: '10px',
-            fontWeight: 300,
-            color: 'rgba(245,242,238,0.18)',
-            lineHeight: 1.75,
+            padding: '40px 0 48px',
             textAlign: 'center',
-            maxWidth: '800px',
-            margin: '0 auto',
-            padding: '28px 0 40px'
+            maxWidth: '900px',
+            margin: '0 auto'
           }}>
 
-          Kinari is not a licensed investment adviser. Nothing on this platform
-          constitutes investment advice. Investments in real estate development
-          projects carry significant risk, including loss of capital. Past
-          performance is not indicative of future results. Access is restricted
-          to qualified investors under applicable law. Kinari operates in
-          compliance with applicable securities regulations in each jurisdiction
-          of operation.
-        </p>
+          <p
+            style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: '10px',
+              fontWeight: 300,
+              color: 'rgba(245,242,238,0.18)',
+              lineHeight: 1.75,
+              marginBottom: '16px'
+            }}>
+
+            MM Intelligence provides specialised technical intelligence,
+            forensic analysis and cybersecurity support within a
+            multidisciplinary professional environment. Technical services do
+            not constitute legal, financial or regulatory advice. Legal advisory
+            services are delivered independently by qualified legal
+            professionals where required. MMLaw is an independent legal practice
+            operating under licence of the MMLaw trademark. Any legal engagement
+            is governed by separate terms issued by the relevant legal entity.
+          </p>
+
+          <p
+            style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: '10px',
+              fontWeight: 300,
+              color: 'rgba(245,242,238,0.18)',
+              lineHeight: 1.75,
+              marginBottom: '24px'
+            }}>
+
+            Analysis is conducted within controlled professional environments
+            designed to prioritise confidentiality, data minimisation and
+            operational security.
+          </p>
+
+          <p
+            style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: '10px',
+              fontWeight: 300,
+              color: 'rgba(245,242,238,0.12)',
+              letterSpacing: '0.05em'
+            }}>
+
+            © MM Intelligence 2026. All rights reserved.
+          </p>
+        </div>
       </div>
     </footer>);
 

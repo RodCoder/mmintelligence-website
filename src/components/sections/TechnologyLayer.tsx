@@ -3,7 +3,7 @@ export function TechnologyLayer(): JSX.Element {
   return (
     <section
       style={{
-        backgroundColor: '#0d0d0d',
+        backgroundColor: '#0A0A0A',
         padding: '128px 0',
         borderTop: '1px solid rgba(245,242,238,0.06)'
       }}>
@@ -12,186 +12,131 @@ export function TechnologyLayer(): JSX.Element {
         style={{
           maxWidth: '1200px',
           margin: '0 auto',
-          padding: '0 56px',
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: '80px',
-          alignItems: 'center'
+          padding: '0 48px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '128px'
         }}>
 
-        {/* Left: Copy */}
-        <div data-reveal>
-          <span className="section-label">Infrastructure</span>
-
-          <h2
-            style={{
-              fontFamily: "'Cormorant Garamond', Georgia, serif",
-              fontSize: 'clamp(36px, 4.5vw, 58px)',
-              fontWeight: 300,
-              color: '#F5F2EE',
-              lineHeight: 1.05,
-              letterSpacing: '-0.025em',
-              marginBottom: '32px'
-            }}>
-
-            Ownership, recorded.
-          </h2>
-
-          <p
-            style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: '15px',
-              fontWeight: 300,
-              color: 'rgba(245,242,238,0.6)',
-              lineHeight: 1.85,
-              maxWidth: '460px',
-              marginBottom: '40px'
-            }}>
-
-            Kinari uses distributed ledger infrastructure to record and transfer
-            ownership positions. This is not a feature — it is the foundation.
-            On-chain records eliminate reconciliation risk, provide real-time
-            audit capability, and enable ownership transfer without intermediary
-            friction. The technology is invisible to the investor. The outcome —
-            transparency, portability, and liquidity — is not.
-          </p>
-
-          <div
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: '10px'
-            }}>
-
-            {[
-            'On-Chain Ownership Records',
-            'Secondary Market Infrastructure',
-            'Regulatory-Compliant Token Structure'].
-            map((tag) =>
-            <span key={tag} className="capability-tag">
-                {tag}
-              </span>
-            )}
-          </div>
-        </div>
-
-        {/* Right: Abstract geometric visual */}
+        {/* PART 1 — About */}
         <div
-          data-reveal
-          data-reveal-delay="200"
-          className="geo-grid glass-panel"
           style={{
-            height: '420px',
-            borderRadius: '2px',
-            position: 'relative'
+            display: 'flex',
+            justifyContent: 'flex-end'
           }}>
 
-          {/* Central accent element */}
           <div
             style={{
-              position: 'absolute',
-              inset: 0,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              zIndex: 1
-            }}>
+              maxWidth: '680px',
+              width: '100%'
+            }}
+            data-reveal>
+
+            <span className="section-label">About</span>
+
+            <p
+              style={{
+                fontFamily: "'Cormorant Garamond', Georgia, serif",
+                fontSize: 'clamp(18px, 2vw, 23px)',
+                fontWeight: 300,
+                color: '#F5F2EE',
+                lineHeight: 1.75,
+                letterSpacing: '0.005em',
+                marginBottom: '40px'
+              }}>
+
+              MM Intelligence is a specialised technical intelligence practice
+              focused on digital asset governance, forensic analysis and privacy
+              architecture. Operating within a multidisciplinary professional
+              environment, we provide structured technical capabilities that
+              support legal advisory, institutional risk management and the
+              secure deployment of complex digital wealth.
+              <br />
+              <br />
+              Our work sits at the intersection of cybersecurity, forensic
+              blockchain analysis and operational governance. Rather than
+              offering isolated technical services, we contribute factual
+              intelligence that enables legal professionals, family offices and
+              institutional clients to understand risk, structure defensible
+              frameworks and interact confidently with banks, regulators and
+              counterparties.
+              <br />
+              <br />
+              MM Intelligence operates as part of the MM group's integrated
+              approach to digital wealth governance. Technical analysis is
+              performed within controlled professional protocols and may be
+              integrated into legal assessments delivered by EU-qualified
+              lawyers where appropriate.
+              <br />
+              <br />
+              Privacy and operational security are central to our methodology.
+              Analysis is conducted within controlled environments, prioritising
+              internal expertise and minimising unnecessary exposure of
+              sensitive information to third-party platforms.
+              <br />
+              <br />
+              Our objective is not merely technical analysis, but the creation
+              of structured intelligence that makes complex digital asset
+              environments understandable, governable and institutionally
+              usable.
+            </p>
 
             <div
               style={{
-                width: '120px',
-                height: '120px',
-                border: '1px solid rgba(201,168,76,0.2)',
-                borderRadius: '50%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                position: 'relative'
+                width: '56px',
+                height: '1px',
+                background: 'rgba(201,168,76,0.35)'
+              }} />
+
+          </div>
+        </div>
+
+        {/* PART 2 — Team */}
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'flex-start'
+          }}>
+
+          <div
+            style={{
+              maxWidth: '680px',
+              width: '100%'
+            }}
+            data-reveal>
+
+            <span className="section-label">Our Team</span>
+
+            <p
+              style={{
+                fontFamily: "'Cormorant Garamond', Georgia, serif",
+                fontSize: 'clamp(18px, 2vw, 23px)',
+                fontWeight: 300,
+                color: '#F5F2EE',
+                lineHeight: 1.75,
+                letterSpacing: '0.005em'
               }}>
 
-              <div
-                style={{
-                  width: '72px',
-                  height: '72px',
-                  border: '1px solid rgba(201,168,76,0.12)',
-                  borderRadius: '50%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}>
-
-                <div
-                  style={{
-                    width: '8px',
-                    height: '8px',
-                    background: 'rgba(201,168,76,0.5)',
-                    borderRadius: '50%'
-                  }} />
-
-              </div>
-              {/* Orbit lines */}
-              {[0, 60, 120, 180, 240, 300].map((deg) =>
-              <div
-                key={deg}
-                style={{
-                  position: 'absolute',
-                  width: '1px',
-                  height: '60px',
-                  background:
-                  'linear-gradient(to bottom, rgba(201,168,76,0.15), transparent)',
-                  transformOrigin: 'bottom center',
-                  transform: `rotate(${deg}deg) translateX(-50%)`,
-                  left: '50%',
-                  bottom: '50%'
-                }} />
-
-              )}
-            </div>
+              MM Intelligence is intentionally structured as a focused and
+              multidisciplinary technical unit operating alongside legal
+              expertise within the MM professional ecosystem.
+              <br />
+              <br />
+              Our team combines experience in blockchain analysis,
+              cybersecurity, digital governance and risk architecture. Work is
+              conducted under controlled professional protocols, ensuring that
+              technical findings remain precise, confidential and suitable for
+              integration into legal and institutional decision-making
+              processes.
+              <br />
+              <br />
+              We collaborate closely with legal professionals, governance
+              specialists and external security partners where appropriate,
+              allowing complex digital asset matters to be addressed through
+              coordinated legal and technical expertise while maintaining strict
+              separation of roles and responsibilities.
+            </p>
           </div>
-
-          {/* Corner labels */}
-          {[
-          {
-            text: 'LEDGER',
-            top: '24px',
-            left: '24px'
-          },
-          {
-            text: 'CUSTODY',
-            top: '24px',
-            right: '24px'
-          },
-          {
-            text: 'LIQUIDITY',
-            bottom: '24px',
-            left: '24px'
-          },
-          {
-            text: 'COMPLIANCE',
-            bottom: '24px',
-            right: '24px'
-          }].
-          map((label) =>
-          <span
-            key={label.text}
-            style={{
-              position: 'absolute',
-              fontFamily: "'Inter', sans-serif",
-              fontSize: '9px',
-              fontWeight: 300,
-              letterSpacing: '0.2em',
-              color: 'rgba(201,168,76,0.3)',
-              textTransform: 'uppercase',
-              zIndex: 2,
-              top: label.top,
-              left: label.left,
-              right: (label as any).right,
-              bottom: (label as any).bottom
-            }}>
-
-              {label.text}
-            </span>
-          )}
         </div>
       </div>
     </section>);
