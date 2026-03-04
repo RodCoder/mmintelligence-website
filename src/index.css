@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap');
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+  :root {
+    --background: hsl(0 0% 100%);
+    --foreground: hsl(222.2 47.4% 11.2%);
+    --muted: hsl(210 40% 96.1%);
+    --muted-foreground: hsl(215.4 16.3% 46.9%);
+    --popover: hsl(0 0% 100%);
+    --popover-foreground: hsl(222.2 47.4% 11.2%);
+    --border: hsl(214.3 31.8% 91.4%);
+    --input: hsl(214.3 31.8% 91.4%);
+    --card: hsl(0 0% 100%);
+    --card-foreground: hsl(222.2 47.4% 11.2%);
+    --primary: hsl(222.2 47.4% 11.2%);
+    --primary-foreground: hsl(210 40% 98%);
+    --secondary: hsl(210 40% 96.1%);
+    --secondary-foreground: hsl(222.2 47.4% 11.2%);
+    --accent: hsl(210 40% 96.1%);
+    --accent-foreground: hsl(222.2 47.4% 11.2%);
+    --destructive: hsl(0 100% 50%);
+    --destructive-foreground: hsl(210 40% 98%);
+    --ring: hsl(215 20.2% 65.1%);
+    --radius: 0.5rem;
+  }
+}
+@layer base {
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: #0A0A0A;
+    color: #F5F2EE;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    overflow-x: hidden;
+  }
+  /* Grain texture overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 9998;
+  }
+}
+/* ─── Scroll Reveal Animations ─── */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+[data-reveal].revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+[data-reveal-delay="100"] { transition-delay: 100ms; }
+[data-reveal-delay="200"] { transition-delay: 200ms; }
+[data-reveal-delay="300"] { transition-delay: 300ms; }
+[data-reveal-delay="400"] { transition-delay: 400ms; }
+[data-reveal-delay="500"] { transition-delay: 500ms; }
+[data-reveal-delay="600"] { transition-delay: 600ms; }
+/* ─── Typography ─── */
+.font-display {
+  font-family: 'Cormorant Garamond', 'Georgia', serif;
+}
+.font-body {
+  font-family: 'Inter', -apple-system, sans-serif;
+}
+/* ─── Glass Panel ─── */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(245, 242, 238, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+/* ─── Kinari CTA Button ─── */
+.kinari-btn {
+  display: inline-block;
+  border: 1px solid rgba(245, 242, 238, 0.25);
+  background: transparent;
+  color: #F5F2EE;
+  padding: 14px 40px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.4s ease, color 0.4s ease, background 0.4s ease;
+  border-radius: 1px;
+  text-decoration: none;
+}
+.kinari-btn:hover {
+  border-color: #C9A84C;
+  color: #C9A84C;
+}
+/* ─── Section Label ─── */
+.section-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(201, 168, 76, 0.75);
+  display: block;
+  margin-bottom: 32px;
+}
+/* ─── Scroll indicator animation ─── */
+@keyframes scrollDot {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(32px); opacity: 0; }
+}
+.scroll-dot {
+  animation: scrollDot 2s ease-in-out infinite;
+}
+/* ─── Track divider ─── */
+.track-divider {
+  border-right: 1px solid rgba(245, 242, 238, 0.07);
+}
+/* ─── Value prop item ─── */
+.value-prop {
+  border-top: 1px solid rgba(245, 242, 238, 0.08);
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+/* ─── Step item ─── */
+.step-item {
+  border-top: 1px solid rgba(245, 242, 238, 0.07);
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+/* ─── Capability tag ─── */
+.capability-tag {
+  border: 1px solid rgba(245, 242, 238, 0.14);
+  padding: 8px 16px;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(245, 242, 238, 0.45);
+  display: inline-block;
+  border-radius: 1px;
+}
+/* ─── Form input ─── */
+.kinari-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(245, 242, 238, 0.12);
+  color: #F5F2EE;
+  padding: 16px 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  border-radius: 1px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+.kinari-input::placeholder {
+  color: rgba(245, 242, 238, 0.25);
+}
+.kinari-input:focus {
+  border-color: rgba(201, 168, 76, 0.5);
+}
+/* ─── Logo placeholder ─── */
+.logo-placeholder {
+  background: rgba(245, 242, 238, 0.03);
+  border: 1px solid rgba(245, 242, 238, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* ─── Geometric lines (tech section) ─── */
+.geo-grid {
+  position: relative;
+  overflow: hidden;
+}
+.geo-grid::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.geo-grid::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 70% at 50% 50%, transparent 30%, rgba(10,10,10,0.85) 100%);
+}
