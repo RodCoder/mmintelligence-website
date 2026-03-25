@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
+import { useBreakpoint } from '../hooks/useBreakpoint';
 
 const TOTAL_FRAMES = 90;
 const frames = Array.from({ length: TOTAL_FRAMES }, (_, i) => {
@@ -6,23 +7,27 @@ const frames = Array.from({ length: TOTAL_FRAMES }, (_, i) => {
   return new URL(`../../assets/images/vault-scroll-animation/ezgif-frame-${num}.jpg`, import.meta.url).href;
 });
 
-// Start preloading immediately at module level (before React mounts)
-const preloadCache: HTMLImageElement[] = [];
+// Preload all frames into Image objects at module level
+const imageCache: HTMLImageElement[] = new Array(TOTAL_FRAMES);
+let loadedCount = 0;
+
 function preloadFrames() {
-  // Load first frame with high priority
+  // First frame with high priority
   const first = new window.Image();
   first.fetchPriority = 'high';
   first.src = frames[0];
-  preloadCache.push(first);
+  first.onload = () => { loadedCount++; };
+  imageCache[0] = first;
 
-  // Load frames in batches during idle time
+  // Rest in batches during idle time
   let idx = 1;
   function loadBatch() {
     const batchSize = 6;
     for (let j = 0; j < batchSize && idx < TOTAL_FRAMES; j++, idx++) {
       const img = new window.Image();
       img.src = frames[idx];
-      preloadCache.push(img);
+      img.onload = () => { loadedCount++; };
+      imageCache[idx] = img;
     }
     if (idx < TOTAL_FRAMES) {
       if ('requestIdleCallback' in window) {
@@ -41,9 +46,40 @@ function preloadFrames() {
 preloadFrames();
 
 export function Hero(): JSX.Element {
-  const bgRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [frameIndex, setFrameIndex] = useState(0);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const lastFrameRef = useRef(-1);
+  const rafRef = useRef<number>(0);
+  const { isMobile, isTablet } = useBreakpoint();
+
+  const drawFrame = useCallback((index: number) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    const img = imageCache[index];
+    if (!img || !img.complete || !img.naturalWidth) return;
+
+    // Resize canvas to match image on first draw or size change
+    if (canvas.width !== img.naturalWidth || canvas.height !== img.naturalHeight) {
+      canvas.width = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+    }
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0);
+  }, []);
+
+  useEffect(() => {
+    // Draw first frame once loaded
+    const checkFirst = setInterval(() => {
+      if (imageCache[0]?.complete && imageCache[0]?.naturalWidth) {
+        drawFrame(0);
+        lastFrameRef.current = 0;
+        clearInterval(checkFirst);
+      }
+    }, 50);
+    return () => clearInterval(checkFirst);
+  }, [drawFrame]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,29 +89,34 @@ export function Hero(): JSX.Element {
       const totalScrollable = containerRef.current.offsetHeight - window.innerHeight;
       const scrolled = -rect.top;
       const progress = Math.min(1, Math.max(0, scrolled / totalScrollable));
+      const newIndex = Math.min(TOTAL_FRAMES - 1, Math.floor(progress * TOTAL_FRAMES));
 
-      setFrameIndex(Math.min(TOTAL_FRAMES - 1, Math.floor(progress * TOTAL_FRAMES)));
-
-      if (bgRef.current) {
-        bgRef.current.style.transform = `translateY(${scrolled * 0.08}px)`;
+      if (newIndex !== lastFrameRef.current) {
+        lastFrameRef.current = newIndex;
+        // Use rAF to batch with paint
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = requestAnimationFrame(() => drawFrame(newIndex));
       }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      cancelAnimationFrame(rafRef.current);
+    };
+  }, [drawFrame]);
 
   const handleRequestAccess = () => {
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <div ref={containerRef} style={{ height: '220vh', backgroundColor: '#101010' }}>
+    <div ref={containerRef} style={{ height: isMobile ? '180vh' : '220vh', backgroundColor: '#101010' }}>
       <section
         style={{
           position: 'sticky',
           top: 0,
           height: '100vh',
-          minHeight: '700px',
+          minHeight: isMobile ? '600px' : '700px',
           overflow: 'hidden',
           display: 'flex',
           alignItems: 'center',
@@ -91,13 +132,14 @@ export function Hero(): JSX.Element {
           width: '100%',
           margin: '0 auto',
           display: 'flex',
+          flexDirection: isMobile ? 'column' : 'row',
           height: '100%',
           alignItems: 'center',
-          justifyContent: 'space-between',
-          padding: '0 56px',
-          gap: '0'
+          justifyContent: isMobile ? 'center' : 'space-between',
+          padding: isMobile ? '0 20px' : isTablet ? '0 32px' : '0 56px',
+          gap: isMobile ? '24px' : '0',
         }}>
-          <div style={{ width: '55%' }}>
+          <div style={{ width: isMobile ? '100%' : isTablet ? '60%' : '55%' }}>
             {/* Main headline */}
             <h1
               style={{
@@ -106,9 +148,9 @@ export function Hero(): JSX.Element {
                 color: '#F5F2EE',
                 lineHeight: 1.0,
                 letterSpacing: '-0.03em',
-                marginBottom: '28px',
+                marginBottom: isMobile ? '20px' : '28px',
                 maxWidth: '820px',
-                fontSize: 'clamp(48px, 6.5vw, 88px)'
+                fontSize: isMobile ? 'clamp(32px, 9vw, 48px)' : 'clamp(48px, 6.5vw, 88px)',
               }}>
               Intelligence for digital and traditional assets
             </h1>
@@ -117,11 +159,11 @@ export function Hero(): JSX.Element {
             <p
               style={{
                 fontFamily: "'Montserrat', sans-serif",
-                fontSize: '18px',
+                fontSize: isMobile ? '14px' : '18px',
                 fontWeight: 300,
                 color: 'rgba(245,242,238,0.5)',
                 letterSpacing: '0.04em',
-                marginBottom: '56px',
+                marginBottom: isMobile ? '32px' : '56px',
                 maxWidth: '800px',
                 lineHeight: 1.6
               }}>
@@ -138,66 +180,72 @@ export function Hero(): JSX.Element {
             </button>
           </div>
 
-          {/* Frame animation */}
-          <div style={{ width: '45%', padding: '80px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <img
-              src={frames[frameIndex]}
-              alt=""
+          {/* Frame animation — canvas instead of img swapping */}
+          <div style={{
+            width: isMobile ? '100%' : isTablet ? '40%' : '45%',
+            padding: isMobile ? '0' : isTablet ? '40px' : '80px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+            <canvas
+              ref={canvasRef}
               style={{
                 width: '100%',
-                maxWidth: '520px',
+                maxWidth: isMobile ? '280px' : '520px',
                 height: 'auto',
                 display: 'block',
                 userSelect: 'none',
-                pointerEvents: 'none'
+                pointerEvents: 'none',
               }}
-              draggable={false}
             />
           </div>
         </div>
 
-        {/* Scroll indicator */}
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '48px',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '8px'
-          }}>
-          <span
-            style={{
-              fontFamily: "'Montserrat', sans-serif",
-              fontSize: '9px',
-              letterSpacing: '0.25em',
-              color: 'rgba(245,242,238,0.2)',
-              textTransform: 'uppercase'
-            }}>
-            Scroll
-          </span>
+        {/* Scroll indicator — hidden on mobile */}
+        {!isMobile && (
           <div
             style={{
-              width: '1px',
-              height: '48px',
-              background: 'rgba(245,242,238,0.12)',
-              position: 'relative',
-              overflow: 'hidden'
+              position: 'absolute',
+              bottom: '48px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '8px'
             }}>
-            <div
-              className="scroll-dot"
+            <span
               style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
+                fontFamily: "'Montserrat', sans-serif",
+                fontSize: '9px',
+                letterSpacing: '0.25em',
+                color: 'rgba(245,242,238,0.2)',
+                textTransform: 'uppercase'
+              }}>
+              Scroll
+            </span>
+            <div
+              style={{
                 width: '1px',
-                height: '16px',
-                background: 'rgba(201,168,76,0.6)'
-              }} />
+                height: '48px',
+                background: 'rgba(245,242,238,0.12)',
+                position: 'relative',
+                overflow: 'hidden'
+              }}>
+              <div
+                className="scroll-dot"
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '1px',
+                  height: '16px',
+                  background: 'rgba(201,168,76,0.6)'
+                }} />
+            </div>
           </div>
-        </div>
+        )}
       </section>
     </div>
   );

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useBreakpoint } from '../hooks/useBreakpoint';
 
 const goals = [
   'Protect and organise their traditional and digital asset structures',
@@ -11,19 +12,22 @@ const goals = [
 ];
 
 export function SupportGoals(): JSX.Element {
+  const { isMobile, isTablet } = useBreakpoint();
+  const px = isMobile ? '0 20px' : isTablet ? '0 32px' : '0 56px';
+
   return (
     <section
       style={{
         position: 'relative',
         overflow: 'hidden',
-        padding: '139px 0 100px',
+        padding: isMobile ? '80px 0 60px' : '139px 0 100px',
         background: 'linear-gradient(180deg, #101010 0%, #111111 30%), #111111',
       }}>
       <div
         style={{
           maxWidth: '1200px',
           margin: '0 auto',
-          padding: '0 56px',
+          padding: px,
         }}>
 
         {/* Intro text */}
@@ -31,12 +35,12 @@ export function SupportGoals(): JSX.Element {
           data-reveal
           style={{
             fontFamily: "'Montserrat', sans-serif",
-            fontSize: '16px',
+            fontSize: isMobile ? '14px' : '16px',
             fontWeight: 400,
             color: '#75622f',
             textTransform: 'uppercase',
-            lineHeight: '40px',
-            marginBottom: '48px',
+            lineHeight: isMobile ? '28px' : '40px',
+            marginBottom: isMobile ? '32px' : '48px',
             maxWidth: '1088px',
           }}>
           Our support is a powerful tool for high net worth individuals, families and private structures to
@@ -51,7 +55,7 @@ export function SupportGoals(): JSX.Element {
             flexDirection: 'column',
             gap: '14px',
             maxWidth: '1088px',
-            marginBottom: '64px',
+            marginBottom: isMobile ? '40px' : '64px',
           }}>
           {goals.map((goal, i) => (
             <div
@@ -61,12 +65,12 @@ export function SupportGoals(): JSX.Element {
                 paddingTop: '12px',
                 display: 'flex',
                 alignItems: 'baseline',
-                gap: '48px',
+                gap: isMobile ? '20px' : isTablet ? '32px' : '48px',
               }}>
               <span
                 style={{
                   fontFamily: "'Cormorant Garamond', Georgia, serif",
-                  fontSize: '18px',
+                  fontSize: isMobile ? '16px' : '18px',
                   fontWeight: 300,
                   color: 'rgba(201,168,76,0.5)',
                   minWidth: '32px',
@@ -77,10 +81,10 @@ export function SupportGoals(): JSX.Element {
               <p
                 style={{
                   fontFamily: "'Cormorant Garamond', Georgia, serif",
-                  fontSize: '24px',
+                  fontSize: isMobile ? '18px' : isTablet ? '20px' : '24px',
                   fontWeight: 300,
                   color: 'rgba(245,242,238,0.7)',
-                  lineHeight: '38px',
+                  lineHeight: isMobile ? '28px' : '38px',
                   letterSpacing: '-0.013em',
                 }}>
                 {goal}
@@ -99,7 +103,7 @@ export function SupportGoals(): JSX.Element {
           }}>
           <p style={{
             fontFamily: "'Montserrat', sans-serif",
-            fontSize: '12px',
+            fontSize: isMobile ? '11px' : '12px',
             fontWeight: 300,
             color: 'rgba(245,242,238,0.4)',
             lineHeight: '18px',
@@ -110,7 +114,7 @@ export function SupportGoals(): JSX.Element {
           </p>
           <p style={{
             fontFamily: "'Montserrat', sans-serif",
-            fontSize: '12px',
+            fontSize: isMobile ? '11px' : '12px',
             fontWeight: 300,
             color: 'rgba(245,242,238,0.4)',
             lineHeight: '18px',
@@ -121,7 +125,7 @@ export function SupportGoals(): JSX.Element {
           </p>
           <p style={{
             fontFamily: "'Montserrat', sans-serif",
-            fontSize: '12px',
+            fontSize: isMobile ? '11px' : '12px',
             fontWeight: 300,
             color: 'rgba(245,242,238,0.4)',
             lineHeight: '18px',

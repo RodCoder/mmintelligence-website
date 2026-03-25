@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useBreakpoint } from '../hooks/useBreakpoint';
 
 interface Capability {
   title: string;
@@ -136,13 +137,13 @@ const capabilitiesRow2: Capability[] = [
   },
 ];
 
-function CapabilityCard({ cap, onOpen }: { cap: Capability; onOpen: () => void }) {
+function CapabilityCard({ cap, onOpen, isMobile }: { cap: Capability; onOpen: () => void; isMobile: boolean }) {
   return (
     <div
       style={{
         background: '#0E0E0E',
         border: '1px solid rgba(245,242,238,0.08)',
-        padding: '32px 37px',
+        padding: isMobile ? '24px 20px' : '32px 37px',
         display: 'flex',
         flexDirection: 'column',
         gap: '8px',
@@ -207,7 +208,7 @@ function CapabilityCard({ cap, onOpen }: { cap: Capability; onOpen: () => void }
   );
 }
 
-function DetailModal({ cap, onClose }: { cap: Capability; onClose: () => void }) {
+function DetailModal({ cap, onClose, isMobile }: { cap: Capability; onClose: () => void; isMobile: boolean }) {
   return (
     <div
       onClick={onClose}
@@ -219,9 +220,9 @@ function DetailModal({ cap, onClose }: { cap: Capability; onClose: () => void })
         backdropFilter: 'blur(12px)',
         WebkitBackdropFilter: 'blur(12px)',
         display: 'flex',
-        alignItems: 'center',
+        alignItems: isMobile ? 'flex-end' : 'center',
         justifyContent: 'center',
-        padding: '40px',
+        padding: isMobile ? '0' : '40px',
         cursor: 'pointer',
       }}>
       <div
@@ -229,9 +230,9 @@ function DetailModal({ cap, onClose }: { cap: Capability; onClose: () => void })
         style={{
           background: '#111111',
           border: '1px solid rgba(245,242,238,0.1)',
-          borderRadius: '2px',
-          padding: '56px 64px',
-          maxWidth: '640px',
+          borderRadius: isMobile ? '12px 12px 0 0' : '2px',
+          padding: isMobile ? '32px 24px' : '56px 64px',
+          maxWidth: isMobile ? '100%' : '640px',
           width: '100%',
           maxHeight: '80vh',
           overflowY: 'auto',
@@ -365,19 +366,22 @@ function DetailModal({ cap, onClose }: { cap: Capability; onClose: () => void })
 
 export function CapabilitiesPreview(): JSX.Element {
   const [activeCapability, setActiveCapability] = useState<Capability | null>(null);
+  const { isMobile, isTablet } = useBreakpoint();
+  const cols = isMobile ? '1fr' : isTablet ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)';
+  const px = isMobile ? '0 20px' : isTablet ? '0 32px' : '0 56px';
 
   return (
     <>
       <section
         style={{
-          padding: '96px 0 80px',
+          padding: isMobile ? '64px 0 48px' : '96px 0 80px',
           background: 'linear-gradient(180deg, #111111 0%, #0A0A0A 100%)',
         }}>
         <div
           style={{
             maxWidth: '1200px',
             margin: '0 auto',
-            padding: '0 56px',
+            padding: px,
           }}>
 
           {/* Section label */}
@@ -388,35 +392,35 @@ export function CapabilitiesPreview(): JSX.Element {
             What we actually do
           </span>
 
-          {/* Row 1 — 4 cards */}
+          {/* Row 1 */}
           <div
             data-reveal
             data-reveal-delay="100"
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(4, 1fr)',
+              gridTemplateColumns: cols,
               gap: '1px',
               background: 'rgba(117,98,47,0.4)',
               marginBottom: '1px',
             }}>
             {capabilitiesRow1.map((cap, i) => (
-              <CapabilityCard key={i} cap={cap} onOpen={() => setActiveCapability(cap)} />
+              <CapabilityCard key={i} cap={cap} isMobile={isMobile} onOpen={() => setActiveCapability(cap)} />
             ))}
           </div>
 
-          {/* Row 2 — 4 cards */}
+          {/* Row 2 */}
           <div
             data-reveal
             data-reveal-delay="200"
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(4, 1fr)',
+              gridTemplateColumns: cols,
               gap: '1px',
               background: 'rgba(117,98,47,0.4)',
               marginBottom: '40px',
             }}>
             {capabilitiesRow2.map((cap, i) => (
-              <CapabilityCard key={i} cap={cap} onOpen={() => setActiveCapability(cap)} />
+              <CapabilityCard key={i} cap={cap} isMobile={isMobile} onOpen={() => setActiveCapability(cap)} />
             ))}
           </div>
 
@@ -438,7 +442,7 @@ export function CapabilitiesPreview(): JSX.Element {
 
       {/* Detail modal */}
       {activeCapability && (
-        <DetailModal cap={activeCapability} onClose={() => setActiveCapability(null)} />
+        <DetailModal cap={activeCapability} isMobile={isMobile} onClose={() => setActiveCapability(null)} />
       )}
     </>
   );

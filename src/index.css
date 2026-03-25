@@ -240,3 +240,33 @@
   inset: 0;
   background: radial-gradient(ellipse 70% 70% at 50% 50%, transparent 30%, rgba(10,10,10,0.85) 100%);
 }
+/* ─── Mobile Responsive ─── */
+@media (max-width: 640px) {
+  .section-label {
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    margin-bottom: 20px;
+  }
+  .kinari-btn {
+    padding: 12px 28px;
+    font-size: 11px;
+    width: 100%;
+    text-align: center;
+  }
+  .kinari-input {
+    padding: 14px 16px;
+    font-size: 13px;
+  }
+  .nav-overlay-link {
+    font-size: clamp(28px, 8vw, 44px);
+    padding: 8px 0;
+  }
+}
+@media (min-width: 641px) and (max-width: 1024px) {
+  .section-label {
+    margin-bottom: 24px;
+  }
+  .kinari-btn {
+    padding: 13px 32px;
+  }
+}
