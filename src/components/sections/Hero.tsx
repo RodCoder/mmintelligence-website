@@ -3,17 +3,47 @@ import React, { useEffect, useRef, useState } from 'react';
 const TOTAL_FRAMES = 90;
 const frames = Array.from({ length: TOTAL_FRAMES }, (_, i) => {
   const num = String(i + 1).padStart(3, '0');
-  return new URL(`../../assets/images/vault-scroll-animation/ezgif-frame-${num}.png`, import.meta.url).href;
+  return new URL(`../../assets/images/vault-scroll-animation/ezgif-frame-${num}.jpg`, import.meta.url).href;
 });
+
+// Start preloading immediately at module level (before React mounts)
+const preloadCache: HTMLImageElement[] = [];
+function preloadFrames() {
+  // Load first frame with high priority
+  const first = new window.Image();
+  first.fetchPriority = 'high';
+  first.src = frames[0];
+  preloadCache.push(first);
+
+  // Load frames in batches during idle time
+  let idx = 1;
+  function loadBatch() {
+    const batchSize = 6;
+    for (let j = 0; j < batchSize && idx < TOTAL_FRAMES; j++, idx++) {
+      const img = new window.Image();
+      img.src = frames[idx];
+      preloadCache.push(img);
+    }
+    if (idx < TOTAL_FRAMES) {
+      if ('requestIdleCallback' in window) {
+        (window as any).requestIdleCallback(loadBatch);
+      } else {
+        setTimeout(loadBatch, 16);
+      }
+    }
+  }
+  if ('requestIdleCallback' in window) {
+    (window as any).requestIdleCallback(loadBatch);
+  } else {
+    setTimeout(loadBatch, 0);
+  }
+}
+preloadFrames();
 
 export function Hero(): JSX.Element {
   const bgRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [frameIndex, setFrameIndex] = useState(0);
-
-  useEffect(() => {
-    frames.forEach(src => { const img = new Image(); img.src = src; });
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -80,7 +110,7 @@ export function Hero(): JSX.Element {
                 maxWidth: '820px',
                 fontSize: 'clamp(48px, 6.5vw, 88px)'
               }}>
-              Intelligence for Digital and Traditional Assets
+              Intelligence for digital and traditional assets
             </h1>
 
             {/* Subline */}

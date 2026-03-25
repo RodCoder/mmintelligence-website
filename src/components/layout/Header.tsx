@@ -3,7 +3,7 @@ import logoSrc from '../../assets/images/mmi-logo-gold.svg';
 import mmlawLogoSrc from '../../assets/images/mmlaw-logo-gold.svg';
 
 const navLinks = [
-  { label: 'What We Do', href: '#capabilities' },
+  { label: 'What we do', href: '#capabilities' },
   { label: 'Methodology', href: '#methodology' },
   { label: 'Collaboration', href: '#collaboration' },
   { label: 'Team', href: '#team' },

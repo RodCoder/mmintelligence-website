@@ -102,6 +102,7 @@ export function TeamCards(): JSX.Element {
                     lineHeight: '20.8px',
                     marginBottom: '6px',
                     letterSpacing: '0.065em',
+                    textTransform: 'uppercase'
                   }}>
                   {member.role}
                 </p>
@@ -110,7 +111,7 @@ export function TeamCards(): JSX.Element {
                     fontFamily: "'Montserrat', sans-serif",
                     fontSize: '14px',
                     fontWeight: 300,
-                    color: 'rgba(245,242,238,0.85)',
+                    color: 'rgba(245,242,238,0.6)',
                     lineHeight: '20.8px',
                     letterSpacing: '0.065em',
                   }}>

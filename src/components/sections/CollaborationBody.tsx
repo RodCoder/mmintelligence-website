@@ -6,7 +6,6 @@ export function CollaborationBody(): JSX.Element {
     <section
       style={{
         padding: '128px 0',
-        borderTop: '1px solid rgba(245,242,238,0.06)',
         background: 'linear-gradient(180deg, #0A0A0A 3.4%, rgba(17,17,17,0.2) 34%), linear-gradient(0deg, #0A0A0A 1.4%, rgba(17,17,17,0.2) 45%), linear-gradient(90deg, #111 0%, #111 100%)',
       }}>
       <div
@@ -34,7 +33,7 @@ export function CollaborationBody(): JSX.Element {
               letterSpacing: '-0.02em',
               marginBottom: '40px',
             }}>
-            In Collaboration with MMLaw
+            In collaboration with MMLaw
           </h2>
 
           <p
