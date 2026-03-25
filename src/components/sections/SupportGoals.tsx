@@ -21,7 +21,7 @@ export function SupportGoals(): JSX.Element {
         position: 'relative',
         overflow: 'hidden',
         padding: isMobile ? '80px 0 60px' : '139px 0 100px',
-        background: 'linear-gradient(180deg, #101010 0%, #111111 30%), #111111',
+        background: 'linear-gradient(180deg, #101010 0%, #101010 10%, #111111 50%), #111111',
       }}>
       <div
         style={{
