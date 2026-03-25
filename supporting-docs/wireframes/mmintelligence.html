@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MM Intelligence — Wireframes</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, sans-serif; font-size: 14px; color: #111; background: #fff; }
+
+  .placeholder { background: #e8e8e8; border: 1px dashed #999; display: flex; align-items: center; justify-content: center; color: #666; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .section-label { font-size: 10px; font-weight: bold; color: #999; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 1px solid #ddd; padding-bottom: 4px; margin-bottom: 12px; }
+  .tbd { background: #fffbe6; border: 1px dashed #cca300; color: #7a5c00; padding: 6px 10px; font-size: 12px; margin: 8px 0; }
+  .cross-link-box { border: 1px dashed #aaa; padding: 12px 16px; margin: 16px 0; background: #f9f9f9; }
+  .warning-box { border: 2px solid #333; padding: 10px 16px; margin: 12px 0; font-size: 13px; }
+
+  .page { border: 2px solid #333; margin: 32px auto; max-width: 900px; }
+  .page-title { background: #111; color: #fff; padding: 8px 16px; font-size: 12px; font-weight: bold; letter-spacing: 0.1em; }
+  .page-url { background: #333; color: #ccc; padding: 4px 16px; font-size: 11px; font-family: monospace; }
+
+  .wf-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 24px; border-bottom: 2px solid #111; }
+  .wf-logo { font-weight: bold; font-size: 16px; border: 2px solid #111; padding: 4px 10px; }
+  .wf-nav { display: flex; gap: 20px; align-items: center; font-size: 13px; }
+  .wf-menu { border: 1px solid #111; padding: 4px 10px; font-size: 12px; cursor: pointer; }
+
+  .wf-footer { border-top: 2px solid #111; padding: 24px; }
+  .wf-footer-nav { display: flex; gap: 20px; margin: 12px 0; font-size: 13px; flex-wrap: wrap; }
+  .wf-footer-partner { border: 1px solid #aaa; padding: 12px; margin: 12px 0; max-width: 380px; font-size: 13px; }
+  .wf-footer-copy { font-size: 12px; color: #666; margin-top: 12px; }
+
+  .nav-overlay-preview { border: 1px dashed #999; padding: 16px; margin: 8px 24px; background: #f5f5f5; font-size: 12px; }
+  .nav-overlay-preview ul { list-style: none; padding-left: 8px; }
+  .nav-overlay-preview li { padding: 4px 0; border-bottom: 1px solid #e0e0e0; }
+
+  .wf-section { border-top: 1px solid #ddd; padding: 24px; }
+
+  .hero-img { width: 100%; height: 220px; }
+  .hero-headline { font-size: 22px; font-weight: bold; margin-bottom: 12px; }
+  .hero-body { font-size: 14px; line-height: 1.6; margin-bottom: 12px; max-width: 680px; }
+
+  .btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 12px; }
+  .btn { border: 2px solid #111; padding: 8px 18px; font-size: 13px; font-weight: bold; background: #fff; cursor: pointer; }
+  .btn-primary { background: #111; color: #fff; }
+
+  .card-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 16px; }
+  .card { border: 1px solid #aaa; padding: 16px; }
+  .card-title { font-weight: bold; font-size: 14px; margin-bottom: 8px; }
+  .card-body { font-size: 13px; line-height: 1.5; color: #333; }
+
+  .cap-block { border: 1px solid #aaa; padding: 20px; margin-bottom: 16px; }
+  .cap-num { font-size: 20px; font-weight: bold; color: #999; margin-bottom: 6px; }
+  .cap-title { font-weight: bold; font-size: 15px; margin-bottom: 8px; }
+  .cap-body { font-size: 13px; line-height: 1.5; color: #333; }
+
+  .step-block { border: 1px solid #aaa; padding: 16px 20px; margin-bottom: 8px; display: flex; gap: 16px; align-items: baseline; }
+  .step-num { font-weight: bold; font-size: 18px; color: #999; min-width: 32px; }
+  .step-text { font-size: 14px; }
+
+  .team-card { border: 1px solid #aaa; padding: 20px; margin-bottom: 16px; }
+  .team-card-anon { color: #555; font-size: 13px; line-height: 1.8; }
+
+  .wf-form { border: 1px solid #aaa; padding: 20px; max-width: 600px; }
+  .form-group { margin-bottom: 16px; }
+  .form-label { font-size: 13px; font-weight: bold; margin-bottom: 6px; display: block; }
+  .form-input { width: 100%; border: 1px solid #aaa; padding: 8px; font-size: 13px; height: 36px; }
+  .form-textarea { width: 100%; border: 1px solid #aaa; padding: 8px; font-size: 13px; height: 72px; resize: none; }
+
+  .info-box { border: 1px solid #aaa; padding: 20px; margin: 12px 0; background: #f9f9f9; max-width: 680px; }
+  .info-box p { font-size: 14px; line-height: 1.7; }
+
+  .site-toc { max-width: 900px; margin: 24px auto 0; padding: 16px; border: 1px solid #ddd; background: #f9f9f9; }
+  .site-toc h2 { font-size: 13px; font-weight: bold; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.08em; }
+  .site-toc ul { display: flex; gap: 12px; flex-wrap: wrap; list-style: none; }
+  .site-toc a { font-size: 13px; color: #111; text-decoration: underline; }
+
+  ul.outcome-list { list-style: disc; padding-left: 20px; font-size: 14px; line-height: 2; }
+</style>
+</head>
+<body>
+
+<div style="background:#111;color:#fff;padding:10px 24px;font-size:12px;text-align:center;letter-spacing:0.05em;">
+  WIREFRAMES — MMINTELLIGENCE.GLOBAL — For Client Review · Not Final Design
+</div>
+
+<div class="site-toc">
+  <h2>MM Intelligence — Pages</h2>
+  <ul>
+    <li><a href="#mmi-home">Home /</a></li>
+    <li><a href="#mmi-capabilities">Capabilities /capabilities</a></li>
+    <li><a href="#mmi-methodology">Methodology /methodology</a></li>
+    <li><a href="#mmi-collaboration">Collaboration with MMLaw /collaboration</a></li>
+    <li><a href="#mmi-team">Team /team</a></li>
+    <li><a href="#mmi-contact">Contact /contact</a></li>
+  </ul>
+</div>
+
+<!-- ============================================================ -->
+<!-- SHARED: HEADER -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="page-title">SHARED COMPONENT — Header (MM Intelligence)</div>
+  <div class="wf-header">
+    <div class="wf-logo">[LOGO: MM INTELLIGENCE]</div>
+    <div class="wf-nav">
+      <span>MMLaw ↗</span>
+      <div class="wf-menu">MENU</div>
+    </div>
+  </div>
+  <div class="nav-overlay-preview">
+    <div class="section-label">Full-screen nav overlay (shown when MENU clicked)</div>
+    <ul>
+      <li>Home</li>
+      <li>Capabilities</li>
+      <li>Methodology</li>
+      <li>Collaboration with MMLaw</li>
+      <li>Team</li>
+      <li>Contact</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SHARED: FOOTER -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="page-title">SHARED COMPONENT — Footer (MM Intelligence)</div>
+  <div class="wf-footer">
+    <div class="wf-logo" style="display:inline-block;">[MM INTELLIGENCE LOGO]</div>
+    <div class="wf-footer-nav">
+      <span>Home</span>
+      <span>Capabilities</span>
+      <span>Methodology</span>
+      <span>Team</span>
+      <span>Contact</span>
+    </div>
+    <div class="wf-footer-partner">
+      <strong>[MMLAW LOGO]</strong>
+      <p style="margin-top:8px;font-size:13px;">Legal advice and certification are led by MMLaw where required.</p>
+    </div>
+    <div class="wf-footer-copy">© MM Intelligence · mmintelligence.global</div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: HOME -->
+<!-- ============================================================ -->
+<div class="page" id="mmi-home">
+  <div class="page-title">PAGE — Home</div>
+  <div class="page-url">mmintelligence.global /</div>
+
+  <div class="wf-header">
+    <div class="wf-logo">[LOGO: MM INTELLIGENCE]</div>
+    <div class="wf-nav"><span>MMLaw ↗</span><div class="wf-menu">MENU</div></div>
+  </div>
+
+  <!-- Section 1: Hero -->
+  <div class="wf-section">
+    <div class="section-label">Section 1 — Hero</div>
+    <div class="placeholder hero-img">[FULL-WIDTH IMAGE PLACEHOLDER]</div>
+    <div style="padding-top:24px;">
+      <div class="hero-headline">Operational intelligence for digital wealth.</div>
+      <div class="hero-body">
+        MM Intelligence provides technical evidencing, cybersecurity assurance, and operational governance support for high-value digital wealth environments. We deliver partner-led work where outcomes depend on judgement, negotiation, and accountability, supported by controlled internal tooling where it improves rigour and confidentiality.
+      </div>
+      <div class="hero-body">
+        We work alongside MMLaw within a controlled, confidentiality-first delivery model.
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary">Engagement</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: Capabilities Preview -->
+  <div class="wf-section">
+    <div class="section-label">Section 2 — Capabilities Preview (4 items)</div>
+    <h2 style="font-size:18px;margin-bottom:16px;">Our Capabilities</h2>
+    <div class="card-grid-2">
+      <div class="card">
+        <div class="card-title">Forensic Evidencing and Transaction Intelligence</div>
+        <div class="card-body">Technical analysis to support structured evidencing and defensible narratives.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Cybersecurity Assurance</div>
+        <div class="card-body">Assessment and remediation planning focused on real-world holding and access pathways.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Wallet Architecture and Operational Governance</div>
+        <div class="card-body">Domain architecture, control design, and operating playbooks aligned to governance requirements.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Controlled Technical Environment</div>
+        <div class="card-body">Internal tooling and disciplined processes designed to reduce unnecessary data exposure.</div>
+      </div>
+    </div>
+    <div style="margin-top:16px;">
+      <a href="#mmi-capabilities" style="font-size:13px;text-decoration:underline;">View All Capabilities →</a>
+    </div>
+  </div>
+
+  <!-- Section 3: MMLaw cross-link -->
+  <div class="wf-section">
+    <div class="section-label">Section 3 — Working Alongside MMLaw (Cross-link)</div>
+    <div class="info-box">
+      <h3 style="margin-bottom:10px;">Working Alongside MMLaw</h3>
+      <p>Legal services and legal deliverables are led by MMLaw where required. &nbsp;<strong>→ MMLaw</strong></p>
+    </div>
+  </div>
+
+  <div class="wf-footer">
+    <div class="wf-logo" style="display:inline-block;">[MM INTELLIGENCE LOGO]</div>
+    <div class="wf-footer-nav"><span>Home</span><span>Capabilities</span><span>Methodology</span><span>Team</span><span>Contact</span></div>
+    <div class="wf-footer-partner"><strong>[MMLAW LOGO]</strong><p style="margin-top:8px;font-size:13px;">Legal advice and certification are led by MMLaw where required.</p></div>
+    <div class="wf-footer-copy">© MM Intelligence · mmintelligence.global</div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: Capabilities -->
+<!-- ============================================================ -->
+<div class="page" id="mmi-capabilities">
+  <div class="page-title">PAGE — Capabilities</div>
+  <div class="page-url">mmintelligence.global /capabilities</div>
+
+  <div class="wf-header">
+    <div class="wf-logo">[LOGO: MM INTELLIGENCE]</div>
+    <div class="wf-nav"><span>MMLaw ↗</span><div class="wf-menu">MENU</div></div>
+  </div>
+
+  <div class="wf-section">
+    <div class="section-label">Section 1 — Page Hero</div>
+    <div class="hero-headline">Capabilities</div>
+    <div class="hero-body">Four specialist areas of technical delivery for high-value digital wealth environments.</div>
+  </div>
+
+  <div class="wf-section">
+    <div class="section-label">Section 2 — Capability Blocks (full-width, stacked)</div>
+
+    <div class="cap-block">
+      <div class="cap-num">01</div>
+      <div class="cap-title">Forensic Evidencing and Transaction Intelligence</div>
+      <div class="cap-body">
+        Technical analysis to support structured evidencing and defensible narratives.
+        <div class="cross-link-box" style="margin-top:12px;">Engagements requiring legal advice or certification are delivered under MMLaw's direction. &nbsp;<strong>→ MMLaw</strong></div>
+      </div>
+    </div>
+
+    <div class="cap-block">
+      <div class="cap-num">02</div>
+      <div class="cap-title">Cybersecurity Assurance</div>
+      <div class="cap-body">
+        Assessment and remediation planning focused on real-world holding and access pathways.
+        <div class="cross-link-box" style="margin-top:12px;">Engagements requiring legal advice or certification are delivered under MMLaw's direction. &nbsp;<strong>→ MMLaw</strong></div>
+      </div>
+    </div>
+
+    <div class="cap-block">
+      <div class="cap-num">03</div>
+      <div class="cap-title">Wallet Architecture and Operational Governance</div>
+      <div class="cap-body">
+        Domain architecture, control design, and operating playbooks aligned to governance requirements.
+        <div class="cross-link-box" style="margin-top:12px;">Engagements requiring legal advice or certification are delivered under MMLaw's direction. &nbsp;<strong>→ MMLaw</strong></div>
+      </div>
+    </div>
+
+    <div class="cap-block">
+      <div class="cap-num">04</div>
+      <div class="cap-title">Controlled Technical Environment</div>
+      <div class="cap-body">
+        Internal tooling and disciplined processes designed to reduce unnecessary data exposure.
+        <div class="cross-link-box" style="margin-top:12px;">Engagements requiring legal advice or certification are delivered under MMLaw's direction. &nbsp;<strong>→ MMLaw</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wf-section">
+    <div class="section-label">Section 3 — CTA</div>
+    <button class="btn btn-primary">Start a Confidential Discussion</button>
+  </div>
+
+  <div class="wf-footer">
+    <div class="wf-logo" style="display:inline-block;">[MM INTELLIGENCE LOGO]</div>
+    <div class="wf-footer-nav"><span>Home</span><span>Capabilities</span><span>Methodology</span><span>Team</span><span>Contact</span></div>
+    <div class="wf-footer-partner"><strong>[MMLAW LOGO]</strong><p style="margin-top:8px;font-size:13px;">Legal advice and certification are led by MMLaw where required.</p></div>
+    <div class="wf-footer-copy">© MM Intelligence · mmintelligence.global</div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: Methodology -->
+<!-- ============================================================ -->
+<div class="page" id="mmi-methodology">
+  <div class="page-title">PAGE — Methodology</div>
+  <div class="page-url">mmintelligence.global /methodology</div>
+
+  <div class="wf-header">
+    <div class="wf-logo">[LOGO: MM INTELLIGENCE]</div>
+    <div class="wf-nav"><span>MMLaw ↗</span><div class="wf-menu">MENU</div></div>
+  </div>
+
+  <div class="wf-section">
+    <div class="section-label">Section 1 — Page Hero</div>
+    <div class="hero-headline">Methodology</div>
+    <div class="hero-body">Our work is designed to support governance, counterparty expectations, and legal workstreams without unnecessary disclosure of sensitive detail.</div>
+  </div>
+
+  <div class="wf-section">
+    <div class="section-label">Section 2 — Four Steps</div>
+    <div class="step-block">
+      <div class="step-num">01</div>
+      <div class="step-text">Define scope and evidencing standards.</div>
+    </div>
+    <div class="step-block">
+      <div class="step-num">02</div>
+      <div class="step-text">Analyse and map.</div>
+    </div>
+    <div class="step-block">
+      <div class="step-num">03</div>
+      <div class="step-text">Validate outputs.</div>
+    </div>
+    <div class="step-block">
+      <div class="step-num">04</div>
+      <div class="step-text">Deliver implementable recommendations.</div>
+    </div>
+  </div>
+
+  <div class="wf-section">
+    <div class="section-label">Section 3 — CTA</div>
+    <button class="btn btn-primary">Start a Confidential Discussion</button>
+  </div>
+
+  <div class="wf-footer">
+    <div class="wf-logo" style="display:inline-block;">[MM INTELLIGENCE LOGO]</div>
+    <div class="wf-footer-nav"><span>Home</span><span>Capabilities</span><span>Methodology</span><span>Team</span><span>Contact</span></div>
+    <div class="wf-footer-partner"><strong>[MMLAW LOGO]</strong><p style="margin-top:8px;font-size:13px;">Legal advice and certification are led by MMLaw where required.</p></div>
+    <div class="wf-footer-copy">© MM Intelligence · mmintelligence.global</div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: Collaboration with MMLaw -->
+<!-- ============================================================ -->
+<div class="page" id="mmi-collaboration">
+  <div class="page-title">PAGE — Collaboration with MMLaw</div>
+  <div class="page-url">mmintelligence.global /collaboration</div>
+
+  <div class="wf-header">
+    <div class="wf-logo">[LOGO: MM INTELLIGENCE]</div>
+    <div class="wf-nav"><span>MMLaw ↗</span><div class="wf-menu">MENU</div></div>
+  </div>
+
+  <div class="wf-section">
+    <div class="section-label">Section 1 — Page Hero</div>
+    <div class="hero-headline">Collaboration with MMLaw</div>
+  </div>
+
+  <div class="wf-section">
+    <div class="section-label">Section 2 — Body</div>
+    <div class="info-box">
+      <p>MM Intelligence is an allied specialist capability supporting MMLaw mandates with technical evidencing, cybersecurity assurance, and operational governance insight.</p>
+    </div>
+    <div class="warning-box">
+      <strong>⚠ MM Intelligence does not provide legal advice.</strong><br>
+      Where legal advice or certification is required, the engagement and deliverables are led by MMLaw.
+    </div>
+  </div>
+
+  <div class="wf-section">
+    <div class="section-label">Section 3 — MMLaw Link</div>
+    <p style="font-size:14px;">Learn more about MMLaw and its services. &nbsp;<strong>→ mmlaw.global</strong></p>
+  </div>
+
+  <div class="wf-footer">
+    <div class="wf-logo" style="display:inline-block;">[MM INTELLIGENCE LOGO]</div>
+    <div class="wf-footer-nav"><span>Home</span><span>Capabilities</span><span>Methodology</span><span>Team</span><span>Contact</span></div>
+    <div class="wf-footer-partner"><strong>[MMLAW LOGO]</strong><p style="margin-top:8px;font-size:13px;">Legal advice and certification are led by MMLaw where required.</p></div>
+    <div class="wf-footer-copy">© MM Intelligence · mmintelligence.global</div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: Team -->
+<!-- ============================================================ -->
+<div class="page" id="mmi-team">
+  <div class="page-title">PAGE — Team</div>
+  <div class="page-url">mmintelligence.global /team</div>
+
+  <div class="wf-header">
+    <div class="wf-logo">[LOGO: MM INTELLIGENCE]</div>
+    <div class="wf-nav"><span>MMLaw ↗</span><div class="wf-menu">MENU</div></div>
+  </div>
+
+  <div class="wf-section">
+    <div class="section-label">Section 1 — Page Hero</div>
+    <div class="hero-headline">Team</div>
+    <div class="hero-body">Specialist, compact, and confidentiality-first.</div>
+    <div class="hero-body" style="margin-top:8px;">We keep biographies brief and avoid operational detail. Enquiries are coordinated through controlled channels.</div>
+  </div>
+
+  <div class="wf-section">
+    <div class="section-label">Section 2 — Team Cards (names not displayed by default)</div>
+    <div class="tbd">[?] OPEN ITEM #6 — Confirm number of team cards and content per card with client. Names are NOT displayed.</div>
+
+    <div class="team-card">
+      <div class="team-card-anon">
+        <strong>Position:</strong> Lead Analyst<br>
+        <strong>Role:</strong> Forensic Intelligence<br><br>
+        <strong>Core expertise:</strong>
+        <ul style="list-style:disc;padding-left:20px;margin-top:4px;">
+          <li>[Expertise item 1]</li>
+          <li>[Expertise item 2]</li>
+          <li>[Expertise item 3]</li>
+        </ul><br>
+        <strong>Sector experience:</strong> [One line, non-specific]
+      </div>
+    </div>
+
+    <div class="team-card" style="border-style:dashed;">
+      <div class="team-card-anon" style="color:#bbb;">
+        [Additional team card — repeat as needed]<br>
+        Position / Role / Core expertise / Sector experience
+      </div>
+    </div>
+  </div>
+
+  <div class="wf-footer">
+    <div class="wf-logo" style="display:inline-block;">[MM INTELLIGENCE LOGO]</div>
+    <div class="wf-footer-nav"><span>Home</span><span>Capabilities</span><span>Methodology</span><span>Team</span><span>Contact</span></div>
+    <div class="wf-footer-partner"><strong>[MMLAW LOGO]</strong><p style="margin-top:8px;font-size:13px;">Legal advice and certification are led by MMLaw where required.</p></div>
+    <div class="wf-footer-copy">© MM Intelligence · mmintelligence.global</div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: Contact -->
+<!-- ============================================================ -->
+<div class="page" id="mmi-contact">
+  <div class="page-title">PAGE — Contact</div>
+  <div class="page-url">mmintelligence.global /contact</div>
+
+  <div class="wf-header">
+    <div class="wf-logo">[LOGO: MM INTELLIGENCE]</div>
+    <div class="wf-nav"><span>MMLaw ↗</span><div class="wf-menu">MENU</div></div>
+  </div>
+
+  <div class="wf-section">
+    <div class="section-label">Section 1 — Page Hero</div>
+    <div class="hero-headline">Contact</div>
+    <div class="hero-body">Start a Confidential Discussion.</div>
+  </div>
+
+  <div class="wf-section">
+    <div class="section-label">Section 2 — Contact Form</div>
+    <div class="tbd">[?] OPEN ITEM #5 — Form fields to be confirmed with client. Placeholder fields shown below pending confirmation.</div>
+
+    <div class="wf-form">
+      <div class="form-group">
+        <label class="form-label">Name (optional)</label>
+        <input class="form-input" type="text" placeholder="">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">How you would like to be contacted</label>
+        <input class="form-input" type="text" placeholder="">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Brief description of the matter (optional)</label>
+        <textarea class="form-textarea"></textarea>
+      </div>
+
+      <button class="btn btn-primary">Submit</button>
+    </div>
+  </div>
+
+  <div class="wf-footer">
+    <div class="wf-logo" style="display:inline-block;">[MM INTELLIGENCE LOGO]</div>
+    <div class="wf-footer-nav"><span>Home</span><span>Capabilities</span><span>Methodology</span><span>Team</span><span>Contact</span></div>
+    <div class="wf-footer-partner"><strong>[MMLAW LOGO]</strong><p style="margin-top:8px;font-size:13px;">Legal advice and certification are led by MMLaw where required.</p></div>
+    <div class="wf-footer-copy">© MM Intelligence · mmintelligence.global</div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- OPEN ITEMS SUMMARY -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="page-title">OPEN ITEMS — For Client Confirmation</div>
+  <div class="wf-section">
+    <table style="width:100%;border-collapse:collapse;font-size:13px;">
+      <thead>
+        <tr style="background:#111;color:#fff;">
+          <th style="padding:8px 12px;text-align:left;">#</th>
+          <th style="padding:8px 12px;text-align:left;">Item</th>
+          <th style="padding:8px 12px;text-align:left;">Affects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #ddd;"><td style="padding:8px 12px;">4</td><td style="padding:8px 12px;">Cross-links: same window or new tab</td><td style="padding:8px 12px;">Both sites</td></tr>
+        <tr style="border-bottom:1px solid #ddd;background:#f9f9f9;"><td style="padding:8px 12px;">5</td><td style="padding:8px 12px;">MM Intelligence contact form fields — confirm with client</td><td style="padding:8px 12px;">MMI Contact</td></tr>
+        <tr style="border-bottom:1px solid #ddd;"><td style="padding:8px 12px;">6</td><td style="padding:8px 12px;">MMI team card count and content per card</td><td style="padding:8px 12px;">MMI Team</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</body>
+</html>

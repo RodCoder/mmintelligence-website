@@ -1,0 +1,1687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MM Intelligence — Brand Guidelines</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap');
+
+  /* ── Tokens ── */
+  :root {
+    --bg:          #0A0A0A;
+    --bg-surface:  #0f0f0f;
+    --bg-raised:   #141414;
+    --border:      rgba(245,242,238,0.07);
+    --border-sub:  rgba(245,242,238,0.04);
+
+    --text:        #F5F2EE;
+    --text-muted:  rgba(245,242,238,0.5);
+    --text-dim:    rgba(245,242,238,0.25);
+    --text-faint:  rgba(245,242,238,0.12);
+
+    --gold:        #C9A84C;
+    --gold-85:     rgba(201,168,76,0.85);
+    --gold-75:     rgba(201,168,76,0.75);
+    --gold-50:     rgba(201,168,76,0.5);
+    --gold-12:     rgba(201,168,76,0.12);
+
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body:    'Inter', -apple-system, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Grain texture */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 9998;
+  }
+
+  /* ══════════════════════════════════════════
+     SIDEBAR NAV
+  ══════════════════════════════════════════ */
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100vh;
+    background: var(--bg-surface);
+    border-right: 1px solid var(--border);
+    padding: 36px 20px;
+    overflow-y: auto;
+    z-index: 100;
+  }
+
+  .nav-wordmark {
+    font-family: var(--font-body);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.38em;
+    color: var(--gold-75);
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    display: block;
+  }
+  .nav-wordmark span { font-weight: 300; }
+
+  .nav-section {
+    font-family: var(--font-body);
+    font-size: 8px;
+    font-weight: 400;
+    color: var(--text-faint);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    margin-top: 24px;
+  }
+  .nav-section:first-of-type { margin-top: 0; }
+
+  .nav a {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--text-dim);
+    text-decoration: none;
+    padding: 5px 8px;
+    margin-bottom: 1px;
+    transition: color 0.2s ease;
+  }
+  .nav a:hover { color: var(--text-muted); }
+  .nav a.active { color: var(--gold-75); }
+
+  /* ══════════════════════════════════════════
+     MAIN
+  ══════════════════════════════════════════ */
+  .main {
+    margin-left: 200px;
+    min-height: 100vh;
+  }
+
+  /* ══════════════════════════════════════════
+     COVER
+  ══════════════════════════════════════════ */
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 80px 72px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(245,242,238,0.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(245,242,238,0.015) 1px, transparent 1px);
+    background-size: 80px 80px;
+    pointer-events: none;
+  }
+
+  .cover::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 75% 55% at 50% 38%, rgba(201,168,76,0.04) 0%, transparent 68%);
+    pointer-events: none;
+  }
+
+  .cover-content { position: relative; z-index: 1; }
+
+  .cover-eyebrow {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.35em;
+    color: var(--gold-75);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    display: block;
+  }
+
+  .cover-title {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 6vw, 88px);
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    margin-bottom: 8px;
+  }
+
+  .cover-subtitle {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 6vw, 88px);
+    font-weight: 300;
+    color: var(--text-faint);
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    margin-bottom: 48px;
+  }
+
+  .cover-meta {
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--border);
+    padding-top: 32px;
+  }
+
+  .cover-meta-item {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 300;
+    color: var(--text-dim);
+  }
+  .cover-meta-item strong {
+    display: block;
+    color: var(--text-muted);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+  }
+
+  /* ══════════════════════════════════════════
+     SECTIONS
+  ══════════════════════════════════════════ */
+  .section {
+    padding: 72px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-header {
+    margin-bottom: 56px;
+  }
+
+  .section-num {
+    font-family: var(--font-body);
+    font-size: 9px;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    color: var(--gold-50);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 300;
+    color: var(--text);
+    letter-spacing: -0.03em;
+    line-height: 1.0;
+    margin-bottom: 16px;
+  }
+
+  .section-desc {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--text-muted);
+    max-width: 560px;
+    line-height: 1.75;
+  }
+
+  /* Rule divider */
+  .rule {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 48px 0 28px;
+  }
+  .rule-label {
+    font-family: var(--font-body);
+    font-size: 9px;
+    font-weight: 300;
+    color: var(--text-dim);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .rule::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ══════════════════════════════════════════
+     COLOR SECTION
+  ══════════════════════════════════════════ */
+  .color-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    margin-bottom: 40px;
+    border: 1px solid var(--border);
+  }
+
+  .color-swatch {
+    background: var(--bg);
+    overflow: hidden;
+  }
+
+  .swatch-preview {
+    height: 100px;
+    display: flex;
+    align-items: flex-end;
+    padding: 12px 16px;
+  }
+
+  .swatch-hex {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+  }
+
+  .swatch-info {
+    padding: 16px;
+    border-top: 1px solid var(--border);
+  }
+
+  .swatch-name {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 4px;
+    letter-spacing: 0.05em;
+  }
+
+  .swatch-role {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 300;
+    color: var(--text-dim);
+  }
+
+  /* Opacity strip */
+  .opacity-strip {
+    display: flex;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 32px;
+    overflow: hidden;
+  }
+
+  .opacity-cell {
+    flex: 1;
+    padding: 16px 12px 12px;
+    background: var(--bg);
+  }
+
+  .opacity-swatch {
+    height: 40px;
+    margin-bottom: 12px;
+    border-radius: 1px;
+  }
+
+  .opacity-label {
+    font-family: var(--font-body);
+    font-size: 9px;
+    font-weight: 300;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+  }
+  .opacity-value {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 300;
+    color: var(--text-muted);
+  }
+
+  /* ══════════════════════════════════════════
+     TYPOGRAPHY SECTION
+  ══════════════════════════════════════════ */
+  .type-specimen {
+    border: 1px solid var(--border);
+    margin-bottom: 1px;
+    padding: 40px 48px;
+    position: relative;
+  }
+
+  .type-meta {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    text-align: right;
+  }
+
+  .type-meta-label {
+    font-family: var(--font-body);
+    font-size: 9px;
+    font-weight: 300;
+    color: var(--text-dim);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .type-meta-value {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--text-muted);
+  }
+
+  .type-scale-row {
+    display: flex;
+    align-items: baseline;
+    gap: 32px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border-sub);
+  }
+
+  .type-scale-label {
+    font-family: var(--font-body);
+    font-size: 9px;
+    font-weight: 300;
+    color: var(--text-dim);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    width: 120px;
+    flex-shrink: 0;
+  }
+
+  .type-scale-spec {
+    font-family: var(--font-body);
+    font-size: 9px;
+    font-weight: 300;
+    color: var(--text-faint);
+    width: 160px;
+    flex-shrink: 0;
+    line-height: 1.6;
+  }
+
+  /* ══════════════════════════════════════════
+     SPACING SECTION
+  ══════════════════════════════════════════ */
+  .spacing-row {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border-sub);
+  }
+
+  .spacing-bar-wrap {
+    width: 280px;
+    flex-shrink: 0;
+  }
+
+  .spacing-bar {
+    background: var(--gold-12);
+    border-left: 2px solid var(--gold-50);
+    height: 20px;
+  }
+
+  .spacing-label {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 300;
+    color: var(--text-muted);
+    width: 60px;
+    flex-shrink: 0;
+  }
+
+  .spacing-desc {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--text-dim);
+  }
+
+  /* ══════════════════════════════════════════
+     COMPONENT SECTION
+  ══════════════════════════════════════════ */
+  .component-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    margin-bottom: 40px;
+    border: 1px solid var(--border);
+  }
+
+  .component-cell {
+    background: var(--bg);
+    padding: 48px 40px;
+  }
+
+  .component-cell-label {
+    font-family: var(--font-body);
+    font-size: 9px;
+    font-weight: 300;
+    color: var(--text-dim);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    display: block;
+  }
+
+  .component-spec-list {
+    margin-top: 24px;
+    border-top: 1px solid var(--border-sub);
+    padding-top: 20px;
+  }
+
+  .spec-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border-sub);
+  }
+
+  .spec-key {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 300;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+  }
+
+  .spec-val {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 300;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* ══════════════════════════════════════════
+     KINARI BUTTON (from codebase)
+  ══════════════════════════════════════════ */
+  .kinari-btn {
+    display: inline-block;
+    border: 1px solid rgba(245,242,238,0.25);
+    background: transparent;
+    color: var(--text);
+    padding: 14px 40px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color 0.4s ease, color 0.4s ease;
+    border-radius: 1px;
+    text-decoration: none;
+  }
+  .kinari-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ══════════════════════════════════════════
+     GLASS PANEL (from codebase)
+  ══════════════════════════════════════════ */
+  .glass-panel {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(245,242,238,0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  /* Section label (from codebase) */
+  .section-label {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold-75);
+    display: block;
+    margin-bottom: 32px;
+  }
+
+  /* Capability tag (from codebase) */
+  .capability-tag {
+    border: 1px solid rgba(245,242,238,0.14);
+    padding: 8px 16px;
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(245,242,238,0.45);
+    display: inline-block;
+    border-radius: 1px;
+  }
+
+  /* Form input (from codebase) */
+  .kinari-input {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(245,242,238,0.12);
+    color: var(--text);
+    padding: 16px 20px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 300;
+    border-radius: 1px;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  .kinari-input::placeholder { color: rgba(245,242,238,0.25); }
+  .kinari-input:focus { border-color: rgba(201,168,76,0.5); }
+
+  /* ══════════════════════════════════════════
+     MOTION
+  ══════════════════════════════════════════ */
+  .motion-row {
+    display: flex;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+
+  .motion-cell {
+    flex: 1;
+    background: var(--bg);
+    padding: 28px 24px;
+  }
+
+  .motion-label {
+    font-family: var(--font-body);
+    font-size: 9px;
+    font-weight: 300;
+    color: var(--text-dim);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .motion-value {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+
+  .motion-note {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 300;
+    color: var(--text-dim);
+  }
+
+  /* ══════════════════════════════════════════
+     VOICE SECTION
+  ══════════════════════════════════════════ */
+  .voice-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 1px;
+  }
+
+  .voice-cell {
+    background: var(--bg);
+    padding: 32px 36px;
+  }
+
+  .voice-cell-label {
+    font-family: var(--font-body);
+    font-size: 9px;
+    font-weight: 300;
+    color: var(--text-dim);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .voice-cell-label::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .voice-cell.do .voice-cell-label::before { background: var(--gold-50); }
+  .voice-cell.dont .voice-cell-label::before { background: rgba(245,242,238,0.15); }
+
+  .voice-text {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+  }
+
+  .voice-cell.do .voice-text { color: var(--text); }
+  .voice-cell.dont .voice-text { color: var(--text-dim); text-decoration: line-through; text-decoration-color: rgba(245,242,238,0.1); }
+
+  /* ══════════════════════════════════════════
+     DO / DON'T
+  ══════════════════════════════════════════ */
+  .do-dont-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 40px;
+    overflow: hidden;
+  }
+
+  .do-dont-cell {
+    background: var(--bg);
+    padding: 40px 36px;
+  }
+
+  .do-dont-label {
+    font-family: var(--font-body);
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: block;
+  }
+  .do-dont-label.do { color: var(--gold-75); }
+  .do-dont-label.dont { color: rgba(245,242,238,0.2); }
+
+  .do-dont-text {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* ══════════════════════════════════════════
+     LOGO SECTION
+  ══════════════════════════════════════════ */
+  .logo-display {
+    display: flex;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+
+  .logo-cell {
+    flex: 1;
+    min-width: 220px;
+    padding: 56px 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    gap: 24px;
+  }
+
+  .logo-wordmark {
+    font-family: var(--font-body);
+    font-size: 13px;
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+  }
+  .logo-wordmark .mm { font-weight: 500; }
+  .logo-wordmark .int { font-weight: 300; }
+
+  .logo-cell-label {
+    font-family: var(--font-body);
+    font-size: 9px;
+    font-weight: 300;
+    color: var(--text-dim);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    align-self: flex-start;
+  }
+
+  /* ══════════════════════════════════════════
+     INLINE CODE / NOTE
+  ══════════════════════════════════════════ */
+  .code {
+    font-family: monospace;
+    font-size: 11px;
+    background: rgba(245,242,238,0.04);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 2px;
+    color: var(--gold-75);
+  }
+
+  .note {
+    background: rgba(201,168,76,0.05);
+    border-left: 2px solid var(--gold-50);
+    padding: 14px 20px;
+    margin: 24px 0;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* scroll dot (from codebase) */
+  @keyframes scrollDot { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(32px); opacity: 0; } }
+  .scroll-dot-demo { animation: scrollDot 2s ease-in-out infinite; }
+
+  /* step item (from codebase) */
+  .step-item {
+    border-top: 1px solid rgba(245,242,238,0.07);
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+
+  /* ══════════════════════════════════════════
+     FULL-WIDTH DEMO STRIP
+  ══════════════════════════════════════════ */
+  .demo-strip {
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    padding: 56px 48px;
+    margin-bottom: 40px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     SIDEBAR NAV
+══════════════════════════════════════════ -->
+<nav class="nav">
+  <span class="nav-wordmark"><span class="mm">MM</span> <span>Intelligence</span></span>
+
+  <div class="nav-section">Identity</div>
+  <a href="#cover">Overview</a>
+  <a href="#logo">Wordmark</a>
+
+  <div class="nav-section">Visual</div>
+  <a href="#color">Colour</a>
+  <a href="#typography">Typography</a>
+  <a href="#spacing">Spacing &amp; Layout</a>
+  <a href="#texture">Texture &amp; Effects</a>
+
+  <div class="nav-section">Components</div>
+  <a href="#buttons">Buttons</a>
+  <a href="#panels">Panels &amp; Cards</a>
+  <a href="#labels">Labels &amp; Tags</a>
+  <a href="#forms">Form Inputs</a>
+  <a href="#motion">Motion</a>
+
+  <div class="nav-section">Usage</div>
+  <a href="#voice">Voice &amp; Tone</a>
+  <a href="#dont">What to Avoid</a>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     MAIN CONTENT
+══════════════════════════════════════════ -->
+<div class="main">
+
+  <!-- ── COVER ── -->
+  <div class="cover" id="cover">
+    <div class="cover-content">
+      <span class="cover-eyebrow">Brand Guidelines</span>
+      <div class="cover-title">MM Intelligence</div>
+      <div class="cover-subtitle">Design System</div>
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <strong>Version</strong>
+          1.0
+        </div>
+        <div class="cover-meta-item">
+          <strong>Domain</strong>
+          mmintelligence.global
+        </div>
+        <div class="cover-meta-item">
+          <strong>Primary Font</strong>
+          Cormorant Garamond
+        </div>
+        <div class="cover-meta-item">
+          <strong>Accent</strong>
+          #C9A84C
+        </div>
+        <div class="cover-meta-item">
+          <strong>Positioning</strong>
+          Institutional · Discreet · Precise
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── WORDMARK ── -->
+  <div class="section" id="logo">
+    <div class="section-header">
+      <span class="section-num">01 — Identity</span>
+      <div class="section-title">Wordmark</div>
+      <p class="section-desc">The MM Intelligence wordmark is typeset entirely in Inter, with differentiated weight between "MM" (500) and "INTELLIGENCE" (300). Wide tracking creates institutional distance. No logomark or icon — the word is the mark.</p>
+    </div>
+
+    <!-- Wordmark on dark -->
+    <div class="logo-display">
+      <div class="logo-cell" style="background: #0A0A0A; min-height: 200px;">
+        <span class="logo-cell-label">Primary — dark ground</span>
+        <div class="logo-wordmark" style="color: rgba(201,168,76,0.85);">
+          <span class="mm">MM</span> <span class="int">INTELLIGENCE</span>
+        </div>
+      </div>
+      <div class="logo-cell" style="background: #F5F2EE; min-height: 200px;">
+        <span class="logo-cell-label" style="color: rgba(10,10,10,0.3);">Reversed — light ground</span>
+        <div class="logo-wordmark" style="color: rgba(10,10,10,0.75);">
+          <span class="mm">MM</span> <span class="int">INTELLIGENCE</span>
+        </div>
+      </div>
+      <div class="logo-cell" style="background: #141414; border-left: 1px solid rgba(245,242,238,0.07); min-height: 200px;">
+        <span class="logo-cell-label">Monochrome — muted</span>
+        <div class="logo-wordmark" style="color: rgba(245,242,238,0.35);">
+          <span class="mm">MM</span> <span class="int">INTELLIGENCE</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="rule"><span class="rule-label">Specifications</span></div>
+    <div class="component-row">
+      <div class="component-cell">
+        <span class="component-cell-label">Token</span>
+        <div class="component-spec-list">
+          <div class="spec-row"><span class="spec-key">Font</span><span class="spec-val">Inter</span></div>
+          <div class="spec-row"><span class="spec-key">MM weight</span><span class="spec-val">500 (medium)</span></div>
+          <div class="spec-row"><span class="spec-key">INTELLIGENCE weight</span><span class="spec-val">300 (light)</span></div>
+          <div class="spec-row"><span class="spec-key">Letter-spacing</span><span class="spec-val">0.38em</span></div>
+          <div class="spec-row"><span class="spec-key">Transform</span><span class="spec-val">uppercase</span></div>
+          <div class="spec-row"><span class="spec-key">Primary colour</span><span class="spec-val">rgba(201,168,76,0.85)</span></div>
+          <div class="spec-row"><span class="spec-key">Footer/muted</span><span class="spec-val">rgba(245,242,238,0.35)</span></div>
+        </div>
+      </div>
+      <div class="component-cell">
+        <span class="component-cell-label">Usage notes</span>
+        <p style="font-size:13px;color:var(--text-muted);line-height:1.75;">Use the gold variant on dark backgrounds — it is the primary expression. The muted white-35 variant appears in footers and secondary contexts. Never use full white (#FFFFFF) for the wordmark. Never alter the weight split between MM and INTELLIGENCE.</p>
+        <div class="note">The space between "MM" and "INTELLIGENCE" is a literal non-breaking space character — preserve it in all implementations.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── COLOUR ── -->
+  <div class="section" id="color">
+    <div class="section-header">
+      <span class="section-num">02 — Visual</span>
+      <div class="section-title">Colour</div>
+      <p class="section-desc">A restrained palette built around near-black, warm parchment, and a single gold accent. Colour is used sparingly — gold marks hierarchy, not decoration.</p>
+    </div>
+
+    <div class="rule"><span class="rule-label">Core palette</span></div>
+    <div class="color-grid">
+      <div class="color-swatch">
+        <div class="swatch-preview" style="background:#0A0A0A;">
+          <span class="swatch-hex" style="color:rgba(245,242,238,0.25);">#0A0A0A</span>
+        </div>
+        <div class="swatch-info">
+          <div class="swatch-name">Void</div>
+          <div class="swatch-role">Primary background</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-preview" style="background:#0F0F0F;">
+          <span class="swatch-hex" style="color:rgba(245,242,238,0.25);">#0F0F0F</span>
+        </div>
+        <div class="swatch-info">
+          <div class="swatch-name">Surface</div>
+          <div class="swatch-role">Nav, header background</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-preview" style="background:#050505;">
+          <span class="swatch-hex" style="color:rgba(245,242,238,0.2);">#050505</span>
+        </div>
+        <div class="swatch-info">
+          <div class="swatch-name">Deep</div>
+          <div class="swatch-role">Footer background</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-preview" style="background:#F5F2EE;">
+          <span class="swatch-hex" style="color:rgba(10,10,10,0.4);">#F5F2EE</span>
+        </div>
+        <div class="swatch-info">
+          <div class="swatch-name">Parchment</div>
+          <div class="swatch-role">Primary text</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-preview" style="background:#C9A84C;">
+          <span class="swatch-hex" style="color:rgba(10,10,10,0.5);">#C9A84C</span>
+        </div>
+        <div class="swatch-info">
+          <div class="swatch-name">Gold</div>
+          <div class="swatch-role">Primary accent, hierarchy marker</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rule"><span class="rule-label">Gold opacity scale</span></div>
+    <div class="opacity-strip">
+      <div class="opacity-cell">
+        <div class="opacity-swatch" style="background:rgba(201,168,76,0.85);"></div>
+        <div class="opacity-label">Gold 85</div>
+        <div class="opacity-value">rgba(201,168,76,0.85)</div>
+      </div>
+      <div class="opacity-cell">
+        <div class="opacity-swatch" style="background:rgba(201,168,76,0.75);"></div>
+        <div class="opacity-label">Gold 75</div>
+        <div class="opacity-value">rgba(201,168,76,0.75)</div>
+      </div>
+      <div class="opacity-cell">
+        <div class="opacity-swatch" style="background:rgba(201,168,76,0.5);"></div>
+        <div class="opacity-label">Gold 50</div>
+        <div class="opacity-value">rgba(201,168,76,0.5)</div>
+      </div>
+      <div class="opacity-cell">
+        <div class="opacity-swatch" style="background:rgba(201,168,76,0.12);"></div>
+        <div class="opacity-label">Gold 12</div>
+        <div class="opacity-value">rgba(201,168,76,0.12)</div>
+      </div>
+    </div>
+
+    <div class="rule"><span class="rule-label">Parchment opacity scale — text hierarchy</span></div>
+    <div class="opacity-strip">
+      <div class="opacity-cell">
+        <div class="opacity-swatch" style="background:#F5F2EE;"></div>
+        <div class="opacity-label">100%</div>
+        <div class="opacity-value">#F5F2EE — Headlines</div>
+      </div>
+      <div class="opacity-cell">
+        <div class="opacity-swatch" style="background:rgba(245,242,238,0.65);"></div>
+        <div class="opacity-label">65%</div>
+        <div class="opacity-value">Body text (rich)</div>
+      </div>
+      <div class="opacity-cell">
+        <div class="opacity-swatch" style="background:rgba(245,242,238,0.5);"></div>
+        <div class="opacity-label">50%</div>
+        <div class="opacity-value">Body text (standard)</div>
+      </div>
+      <div class="opacity-cell">
+        <div class="opacity-swatch" style="background:rgba(245,242,238,0.35);"></div>
+        <div class="opacity-label">35%</div>
+        <div class="opacity-value">Secondary/footer nav</div>
+      </div>
+      <div class="opacity-cell">
+        <div class="opacity-swatch" style="background:rgba(245,242,238,0.25);"></div>
+        <div class="opacity-label">25%</div>
+        <div class="opacity-value">Placeholder text</div>
+      </div>
+      <div class="opacity-cell">
+        <div class="opacity-swatch" style="background:rgba(245,242,238,0.12);"></div>
+        <div class="opacity-label">12%</div>
+        <div class="opacity-value">Copyright / faint</div>
+      </div>
+    </div>
+
+    <div class="rule"><span class="rule-label">Border and surface opacity</span></div>
+    <div class="opacity-strip">
+      <div class="opacity-cell">
+        <div class="opacity-swatch" style="background:rgba(245,242,238,0.08);border:1px solid rgba(245,242,238,0.08);"></div>
+        <div class="opacity-label">8%</div>
+        <div class="opacity-value">Glass panel border</div>
+      </div>
+      <div class="opacity-cell">
+        <div class="opacity-swatch" style="background:rgba(245,242,238,0.07);border:1px solid rgba(245,242,238,0.07);"></div>
+        <div class="opacity-label">7%</div>
+        <div class="opacity-value">Section dividers</div>
+      </div>
+      <div class="opacity-cell">
+        <div class="opacity-swatch" style="background:rgba(245,242,238,0.06);border:1px solid rgba(245,242,238,0.06);"></div>
+        <div class="opacity-label">6%</div>
+        <div class="opacity-value">Header/footer borders</div>
+      </div>
+      <div class="opacity-cell">
+        <div class="opacity-swatch" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.03);"></div>
+        <div class="opacity-label">3%</div>
+        <div class="opacity-value">Glass panel fill</div>
+      </div>
+    </div>
+
+    <div class="note">Never use pure white (#FFFFFF) or saturated colours in the interface. Gold is the only warm accent. All other values are neutral parchment-on-void opacity steps.</div>
+  </div>
+
+  <!-- ── TYPOGRAPHY ── -->
+  <div class="section" id="typography">
+    <div class="section-header">
+      <span class="section-num">02 — Visual</span>
+      <div class="section-title">Typography</div>
+      <p class="section-desc">Two typefaces only: Cormorant Garamond for display and editorial; Inter for UI, labels, and body. The contrast between a classical serif and a neutral sans carries the brand's tension between legal precision and operational clarity.</p>
+    </div>
+
+    <!-- Display type specimen -->
+    <div class="type-specimen">
+      <div class="type-meta">
+        <span class="type-meta-label">Font</span>
+        <span class="type-meta-value">Cormorant Garamond</span>
+      </div>
+      <p style="font-size:10px;font-weight:300;letter-spacing:0.3em;color:var(--gold-50);text-transform:uppercase;margin-bottom:20px;">Display — Cormorant Garamond 300</p>
+      <div style="font-family:var(--font-display);font-size:clamp(48px,6vw,84px);font-weight:300;color:var(--text);line-height:1.0;letter-spacing:-0.03em;">
+        Operational intelligence<br>for digital wealth.
+      </div>
+    </div>
+
+    <div class="type-specimen">
+      <div class="type-meta">
+        <span class="type-meta-label">Font</span>
+        <span class="type-meta-value">Cormorant Garamond Italic</span>
+      </div>
+      <p style="font-size:10px;font-weight:300;letter-spacing:0.3em;color:var(--gold-50);text-transform:uppercase;margin-bottom:20px;">Display italic — editorial use only</p>
+      <div style="font-family:var(--font-display);font-size:clamp(32px,4vw,56px);font-weight:300;font-style:italic;color:var(--text-muted);line-height:1.1;letter-spacing:-0.02em;">
+        Partner-led. Discreet by design.
+      </div>
+    </div>
+
+    <div class="type-specimen">
+      <div class="type-meta">
+        <span class="type-meta-label">Font</span>
+        <span class="type-meta-value">Inter</span>
+      </div>
+      <p style="font-size:10px;font-weight:300;letter-spacing:0.3em;color:var(--gold-50);text-transform:uppercase;margin-bottom:20px;">Body — Inter 300</p>
+      <div style="font-family:var(--font-body);font-size:15px;font-weight:300;color:rgba(245,242,238,0.6);line-height:1.85;max-width:640px;">
+        MM Intelligence provides technical evidencing, cybersecurity assurance, and operational governance support for high-value digital wealth environments. We deliver partner-led work where outcomes depend on judgement, negotiation, and accountability.
+      </div>
+    </div>
+
+    <div class="rule"><span class="rule-label">Type scale</span></div>
+    <div style="border:1px solid var(--border);">
+      <div class="type-scale-row" style="border-bottom:1px solid var(--border);padding:20px 24px;">
+        <span class="type-scale-label">Hero / H1</span>
+        <span class="type-scale-spec">Cormorant Garamond 300<br>clamp(42px,5vw,72px)<br>–0.03em tracking<br>line-height: 1.0</span>
+        <div style="font-family:var(--font-display);font-size:48px;font-weight:300;color:var(--text);letter-spacing:-0.03em;line-height:1.0;">Capabilities</div>
+      </div>
+      <div class="type-scale-row" style="border-bottom:1px solid var(--border);padding:20px 24px;">
+        <span class="type-scale-label">Section H2</span>
+        <span class="type-scale-spec">Cormorant Garamond 300<br>clamp(24px,3vw,36px)<br>–0.02em tracking</span>
+        <div style="font-family:var(--font-display);font-size:32px;font-weight:300;color:var(--text);letter-spacing:-0.02em;">Forensic Evidencing</div>
+      </div>
+      <div class="type-scale-row" style="border-bottom:1px solid var(--border);padding:20px 24px;">
+        <span class="type-scale-label">Step / num</span>
+        <span class="type-scale-spec">Cormorant Garamond 300<br>clamp(22px,2.5vw,32px)<br>–0.01em tracking</span>
+        <div style="font-family:var(--font-display);font-size:28px;font-weight:300;color:var(--text);letter-spacing:-0.01em;">Analyse and map.</div>
+      </div>
+      <div class="type-scale-row" style="border-bottom:1px solid var(--border);padding:20px 24px;">
+        <span class="type-scale-label">Body (rich)</span>
+        <span class="type-scale-spec">Inter 300<br>15px<br>+0.05em tracking<br>line-height: 1.85</span>
+        <div style="font-family:var(--font-body);font-size:15px;font-weight:300;color:rgba(245,242,238,0.6);line-height:1.85;max-width:400px;">Technical analysis to support structured evidencing and defensible narratives.</div>
+      </div>
+      <div class="type-scale-row" style="border-bottom:1px solid var(--border);padding:20px 24px;">
+        <span class="type-scale-label">Body (standard)</span>
+        <span class="type-scale-spec">Inter 300<br>14px<br>line-height: 1.75</span>
+        <div style="font-family:var(--font-body);font-size:14px;font-weight:300;color:rgba(245,242,238,0.55);line-height:1.75;max-width:400px;">Domain architecture, control design, and operating playbooks aligned to governance requirements.</div>
+      </div>
+      <div class="type-scale-row" style="border-bottom:1px solid var(--border);padding:20px 24px;">
+        <span class="type-scale-label">Small / caption</span>
+        <span class="type-scale-spec">Inter 300<br>13px<br>line-height: 1.7</span>
+        <div style="font-family:var(--font-body);font-size:13px;font-weight:300;color:rgba(245,242,238,0.35);line-height:1.7;">Enquiries are coordinated through controlled channels.</div>
+      </div>
+      <div class="type-scale-row" style="border-bottom:1px solid var(--border);padding:20px 24px;">
+        <span class="type-scale-label">Section label</span>
+        <span class="type-scale-spec">Inter 300<br>10px<br>+0.35em tracking<br>UPPERCASE</span>
+        <div style="font-family:var(--font-body);font-size:10px;font-weight:300;color:rgba(201,168,76,0.75);letter-spacing:0.35em;text-transform:uppercase;">Our Capabilities</div>
+      </div>
+      <div class="type-scale-row" style="padding:20px 24px;">
+        <span class="type-scale-label">Micro / legal</span>
+        <span class="type-scale-spec">Inter 300<br>10px<br>line-height: 1.75<br>rgba(245,242,238,0.18)</span>
+        <div style="font-family:var(--font-body);font-size:10px;font-weight:300;color:rgba(245,242,238,0.18);line-height:1.75;max-width:400px;">MM Intelligence provides specialised technical intelligence, forensic analysis and cybersecurity support within a multidisciplinary professional environment.</div>
+      </div>
+    </div>
+
+    <div class="rule"><span class="rule-label">Large dim numerals — capability indexing</span></div>
+    <div style="border:1px solid var(--border);padding:32px 40px;display:flex;gap:48px;align-items:center;">
+      <div style="font-family:var(--font-display);font-size:72px;font-weight:300;color:rgba(245,242,238,0.1);line-height:1;">01</div>
+      <div>
+        <p style="font-size:12px;font-weight:300;color:var(--text-dim);margin-bottom:8px;">Cormorant Garamond 300 · 56px · rgba(245,242,238,0.10)</p>
+        <p style="font-size:13px;font-weight:300;color:var(--text-muted);">Used as section anchor numerals in Capabilities and Methodology pages. Large size, very low opacity — structural, not decorative.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SPACING ── -->
+  <div class="section" id="spacing">
+    <div class="section-header">
+      <span class="section-num">02 — Visual</span>
+      <div class="section-title">Spacing &amp; Layout</div>
+      <p class="section-desc">Generous, consistent whitespace signals restraint and confidence. The site uses a fixed horizontal gutter and a centred max-width container throughout.</p>
+    </div>
+
+    <div class="rule"><span class="rule-label">Layout constants</span></div>
+    <div class="component-row">
+      <div class="component-cell">
+        <span class="component-cell-label">Container</span>
+        <div class="component-spec-list">
+          <div class="spec-row"><span class="spec-key">Max width</span><span class="spec-val">1200px</span></div>
+          <div class="spec-row"><span class="spec-key">Horizontal padding</span><span class="spec-val">56px</span></div>
+          <div class="spec-row"><span class="spec-key">Alignment</span><span class="spec-val">margin: 0 auto</span></div>
+        </div>
+      </div>
+      <div class="component-cell">
+        <span class="component-cell-label">Header</span>
+        <div class="component-spec-list">
+          <div class="spec-row"><span class="spec-key">Height</span><span class="spec-val">64px</span></div>
+          <div class="spec-row"><span class="spec-key">Position</span><span class="spec-val">fixed, z-index 50</span></div>
+          <div class="spec-row"><span class="spec-key">Page top offset</span><span class="spec-val">160px (64 + 96)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rule"><span class="rule-label">Vertical rhythm</span></div>
+    <div style="border:1px solid var(--border);">
+      <div class="spacing-row" style="padding:16px 24px;border-bottom:1px solid var(--border-sub);">
+        <div class="spacing-label">8px</div>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:8px;"></div></div>
+        <div class="spacing-desc">Tight gap — label to value, icon to text</div>
+      </div>
+      <div class="spacing-row" style="padding:16px 24px;border-bottom:1px solid var(--border-sub);">
+        <div class="spacing-label">16px</div>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:16px;"></div></div>
+        <div class="spacing-desc">Form field gap, card internal spacing</div>
+      </div>
+      <div class="spacing-row" style="padding:16px 24px;border-bottom:1px solid var(--border-sub);">
+        <div class="spacing-label">24px</div>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:24px;"></div></div>
+        <div class="spacing-desc">Headline to subtitle gap</div>
+      </div>
+      <div class="spacing-row" style="padding:16px 24px;border-bottom:1px solid var(--border-sub);">
+        <div class="spacing-label">32px</div>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:32px;"></div></div>
+        <div class="spacing-desc">Section label margin-bottom</div>
+      </div>
+      <div class="spacing-row" style="padding:16px 24px;border-bottom:1px solid var(--border-sub);">
+        <div class="spacing-label">48px</div>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:48px;"></div></div>
+        <div class="spacing-desc">CTA button offset, card internal padding</div>
+      </div>
+      <div class="spacing-row" style="padding:16px 24px;border-bottom:1px solid var(--border-sub);">
+        <div class="spacing-label">56px</div>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:56px;"></div></div>
+        <div class="spacing-desc">Hero subtext margin-bottom; horizontal gutter</div>
+      </div>
+      <div class="spacing-row" style="padding:16px 24px;border-bottom:1px solid var(--border-sub);">
+        <div class="spacing-label">96px</div>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:96px;"></div></div>
+        <div class="spacing-desc">Section padding (compact — CTA, cross-link)</div>
+      </div>
+      <div class="spacing-row" style="padding:16px 24px;">
+        <div class="spacing-label">128px</div>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:128px;"></div></div>
+        <div class="spacing-desc">Section padding (standard — Capabilities, Methodology)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TEXTURE ── -->
+  <div class="section" id="texture">
+    <div class="section-header">
+      <span class="section-num">02 — Visual</span>
+      <div class="section-title">Texture &amp; Effects</div>
+      <p class="section-desc">Three layered effects define the atmospheric quality of the site. They are applied globally and should be maintained in all implementations.</p>
+    </div>
+
+    <div class="component-row">
+      <div class="component-cell">
+        <span class="component-cell-label">01 — Grain texture</span>
+        <div style="height:120px;position:relative;background:#0A0A0A;border:1px solid var(--border);overflow:hidden;">
+          <div style="position:absolute;inset:0;background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E\");opacity:0.15;"></div>
+        </div>
+        <div class="component-spec-list">
+          <div class="spec-row"><span class="spec-key">Method</span><span class="spec-val">SVG feTurbulence, body::after</span></div>
+          <div class="spec-row"><span class="spec-key">Opacity</span><span class="spec-val">0.04</span></div>
+          <div class="spec-row"><span class="spec-key">z-index</span><span class="spec-val">9998 (above everything)</span></div>
+          <div class="spec-row"><span class="spec-key">Interaction</span><span class="spec-val">pointer-events: none</span></div>
+        </div>
+      </div>
+      <div class="component-cell">
+        <span class="component-cell-label">02 — Architectural grid</span>
+        <div style="height:120px;background:#0A0A0A;border:1px solid var(--border);background-image:linear-gradient(rgba(245,242,238,0.05) 1px, transparent 1px),linear-gradient(90deg, rgba(245,242,238,0.05) 1px, transparent 1px);background-size:40px 40px;"></div>
+        <div class="component-spec-list">
+          <div class="spec-row"><span class="spec-key">Pattern</span><span class="spec-val">80px × 80px grid</span></div>
+          <div class="spec-row"><span class="spec-key">Colour</span><span class="spec-val">rgba(245,242,238,0.015)</span></div>
+          <div class="spec-row"><span class="spec-key">Used in</span><span class="spec-val">Hero background, cover</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="component-row">
+      <div class="component-cell">
+        <span class="component-cell-label">03 — Gold radial glow</span>
+        <div style="height:120px;background:#0A0A0A;border:1px solid var(--border);background:radial-gradient(ellipse 75% 55% at 50% 50%, rgba(201,168,76,0.12) 0%, transparent 68%),#0A0A0A;"></div>
+        <div class="component-spec-list">
+          <div class="spec-row"><span class="spec-key">Type</span><span class="spec-val">radial-gradient ellipse</span></div>
+          <div class="spec-row"><span class="spec-key">Colour</span><span class="spec-val">rgba(201,168,76,0.045)</span></div>
+          <div class="spec-row"><span class="spec-key">Position</span><span class="spec-val">50% 38%</span></div>
+          <div class="spec-row"><span class="spec-key">Used in</span><span class="spec-val">Hero, brandbook cover</span></div>
+        </div>
+      </div>
+      <div class="component-cell">
+        <span class="component-cell-label">Border radius</span>
+        <p style="font-size:13px;font-weight:300;color:var(--text-muted);line-height:1.75;margin-bottom:20px;">The site uses near-zero border radius throughout. Hard, architectural corners signal precision. Only <span class="code">border-radius: 1px</span> is permitted on interactive elements (buttons, inputs). All panels and cards are <span class="code">border-radius: 0</span>.</p>
+        <div class="component-spec-list">
+          <div class="spec-row"><span class="spec-key">Default (panels, cards)</span><span class="spec-val">0px</span></div>
+          <div class="spec-row"><span class="spec-key">Buttons, inputs</span><span class="spec-val">1px</span></div>
+          <div class="spec-row"><span class="spec-key">Never use</span><span class="spec-val">> 2px</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── BUTTONS ── -->
+  <div class="section" id="buttons">
+    <div class="section-header">
+      <span class="section-num">03 — Components</span>
+      <div class="section-title">Buttons</div>
+      <p class="section-desc">One button style. Transparent background, fine border, uppercase Inter at wide tracking. Hover state transitions border and text to gold. There is no filled or solid button variant.</p>
+    </div>
+
+    <div class="component-row">
+      <div class="component-cell">
+        <span class="component-cell-label">Default state</span>
+        <button class="kinari-btn">Start a Confidential Discussion</button>
+        <div class="component-spec-list">
+          <div class="spec-row"><span class="spec-key">Font</span><span class="spec-val">Inter, 12px, weight 400</span></div>
+          <div class="spec-row"><span class="spec-key">Letter-spacing</span><span class="spec-val">0.18em</span></div>
+          <div class="spec-row"><span class="spec-key">Transform</span><span class="spec-val">uppercase</span></div>
+          <div class="spec-row"><span class="spec-key">Padding</span><span class="spec-val">14px 40px</span></div>
+          <div class="spec-row"><span class="spec-key">Border</span><span class="spec-val">1px solid rgba(245,242,238,0.25)</span></div>
+          <div class="spec-row"><span class="spec-key">Background</span><span class="spec-val">transparent</span></div>
+          <div class="spec-row"><span class="spec-key">Color</span><span class="spec-val">#F5F2EE</span></div>
+          <div class="spec-row"><span class="spec-key">Border-radius</span><span class="spec-val">1px</span></div>
+        </div>
+      </div>
+      <div class="component-cell">
+        <span class="component-cell-label">Hover state</span>
+        <button class="kinari-btn" style="border-color:#C9A84C;color:#C9A84C;">Start a Confidential Discussion</button>
+        <div class="component-spec-list">
+          <div class="spec-row"><span class="spec-key">Border</span><span class="spec-val">#C9A84C</span></div>
+          <div class="spec-row"><span class="spec-key">Color</span><span class="spec-val">#C9A84C</span></div>
+          <div class="spec-row"><span class="spec-key">Transition</span><span class="spec-val">border-color 0.4s ease, color 0.4s ease</span></div>
+          <div class="spec-row"><span class="spec-key">Background</span><span class="spec-val">transparent (no fill)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rule"><span class="rule-label">Common CTA labels</span></div>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;">
+      <button class="kinari-btn">Engagement</button>
+      <button class="kinari-btn">Start a Confidential Discussion</button>
+      <button class="kinari-btn">Submit</button>
+      <button class="kinari-btn">MENU</button>
+    </div>
+    <div class="note">The MENU button uses a reduced size variant: padding 8px 20px · font-size 10px. All other CTA buttons use the standard size. Never create filled, coloured, or shadow variants.</div>
+  </div>
+
+  <!-- ── PANELS ── -->
+  <div class="section" id="panels">
+    <div class="section-header">
+      <span class="section-num">03 — Components</span>
+      <div class="section-title">Panels &amp; Cards</div>
+      <p class="section-desc">The glass panel is the primary card surface — a very subtle frosted effect on near-black. Used for info boxes, capability cards, team cards, and feature highlights.</p>
+    </div>
+
+    <div class="component-row">
+      <div class="component-cell">
+        <span class="component-cell-label">Glass panel</span>
+        <div class="glass-panel" style="padding:40px 36px;max-width:400px;">
+          <p style="font-size:10px;font-weight:300;letter-spacing:0.35em;text-transform:uppercase;color:rgba(201,168,76,0.75);margin-bottom:16px;">Our Capabilities</p>
+          <p style="font-family:var(--font-body);font-size:14px;font-weight:300;color:rgba(245,242,238,0.55);line-height:1.8;">Technical analysis to support structured evidencing and defensible narratives.</p>
+        </div>
+        <div class="component-spec-list">
+          <div class="spec-row"><span class="spec-key">Background</span><span class="spec-val">rgba(255,255,255,0.03)</span></div>
+          <div class="spec-row"><span class="spec-key">Border</span><span class="spec-val">1px solid rgba(245,242,238,0.08)</span></div>
+          <div class="spec-row"><span class="spec-key">Backdrop filter</span><span class="spec-val">blur(16px)</span></div>
+          <div class="spec-row"><span class="spec-key">Border-radius</span><span class="spec-val">0px</span></div>
+        </div>
+      </div>
+      <div class="component-cell">
+        <span class="component-cell-label">Warning / notice box</span>
+        <div style="border:2px solid rgba(245,242,238,0.12);padding:32px 36px;max-width:400px;">
+          <p style="font-size:14px;font-weight:400;color:rgba(245,242,238,0.85);margin-bottom:10px;"><span style="color:#C9A84C;margin-right:8px;">⚠</span> MM Intelligence does not provide legal advice.</p>
+          <p style="font-size:14px;font-weight:300;color:rgba(245,242,238,0.5);line-height:1.7;">Where legal advice or certification is required, the engagement and deliverables are led by MMLaw.</p>
+        </div>
+        <div class="component-spec-list">
+          <div class="spec-row"><span class="spec-key">Border</span><span class="spec-val">2px solid rgba(245,242,238,0.12)</span></div>
+          <div class="spec-row"><span class="spec-key">Background</span><span class="spec-val">none</span></div>
+          <div class="spec-row"><span class="spec-key">⚠ colour</span><span class="spec-val">#C9A84C</span></div>
+          <div class="spec-row"><span class="spec-key">Heading weight</span><span class="spec-val">400 (slightly bolder)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rule"><span class="rule-label">MMLaw cross-link — inline variant</span></div>
+    <div style="border:1px solid var(--border);padding:32px 40px;max-width:720px;">
+      <div style="border:1px solid rgba(245,242,238,0.08);padding:20px 24px;background:rgba(255,255,255,0.02);">
+        <p style="font-family:var(--font-body);font-size:13px;font-weight:300;color:rgba(245,242,238,0.45);line-height:1.7;margin-bottom:10px;">Engagements requiring legal advice or certification are delivered under MMLaw's direction.</p>
+        <a href="#" style="font-size:11px;font-weight:300;letter-spacing:0.18em;text-transform:uppercase;color:rgba(201,168,76,0.75);text-decoration:none;">→ MMLaw</a>
+      </div>
+    </div>
+    <div class="note">The inline cross-link box appears inside every capability block on the Capabilities page. It uses a 2% white fill and 8% border — slightly lighter than glass-panel to distinguish it as a reference, not a feature.</div>
+  </div>
+
+  <!-- ── LABELS ── -->
+  <div class="section" id="labels">
+    <div class="section-header">
+      <span class="section-num">03 — Components</span>
+      <div class="section-title">Labels &amp; Tags</div>
+      <p class="section-desc">Three label types handle hierarchy signalling, section marking, and capability tagging.</p>
+    </div>
+
+    <div class="component-row">
+      <div class="component-cell">
+        <span class="component-cell-label">Section label — .section-label</span>
+        <span class="section-label" style="margin-bottom:0;">Our Capabilities</span>
+        <div class="component-spec-list">
+          <div class="spec-row"><span class="spec-key">Font</span><span class="spec-val">Inter 300</span></div>
+          <div class="spec-row"><span class="spec-key">Size</span><span class="spec-val">10px</span></div>
+          <div class="spec-row"><span class="spec-key">Letter-spacing</span><span class="spec-val">0.35em</span></div>
+          <div class="spec-row"><span class="spec-key">Color</span><span class="spec-val">rgba(201,168,76,0.75)</span></div>
+          <div class="spec-row"><span class="spec-key">Transform</span><span class="spec-val">uppercase</span></div>
+          <div class="spec-row"><span class="spec-key">Margin-bottom</span><span class="spec-val">32px</span></div>
+        </div>
+      </div>
+      <div class="component-cell">
+        <span class="component-cell-label">Capability tag — .capability-tag</span>
+        <span class="capability-tag">Forensic Evidencing</span>
+        <div class="component-spec-list">
+          <div class="spec-row"><span class="spec-key">Font</span><span class="spec-val">Inter 300</span></div>
+          <div class="spec-row"><span class="spec-key">Size</span><span class="spec-val">10px</span></div>
+          <div class="spec-row"><span class="spec-key">Letter-spacing</span><span class="spec-val">0.15em</span></div>
+          <div class="spec-row"><span class="spec-key">Color</span><span class="spec-val">rgba(245,242,238,0.45)</span></div>
+          <div class="spec-row"><span class="spec-key">Border</span><span class="spec-val">1px solid rgba(245,242,238,0.14)</span></div>
+          <div class="spec-row"><span class="spec-key">Padding</span><span class="spec-val">8px 16px</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rule"><span class="rule-label">Scroll indicator</span></div>
+    <div style="border:1px solid var(--border);padding:40px;display:flex;align-items:center;gap:48px;">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <span style="font-size:9px;letter-spacing:0.25em;color:rgba(245,242,238,0.2);text-transform:uppercase;font-family:var(--font-body);">Scroll</span>
+        <div style="width:1px;height:48px;background:rgba(245,242,238,0.12);position:relative;overflow:hidden;">
+          <div class="scroll-dot-demo" style="position:absolute;top:0;left:0;width:1px;height:16px;background:rgba(201,168,76,0.6);"></div>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:13px;font-weight:300;color:var(--text-muted);margin-bottom:8px;">Hero scroll indicator</p>
+        <p style="font-size:11px;font-weight:300;color:var(--text-dim);">1px gold line animating downward. Label: Inter 9px, letter-spacing 0.25em, rgba(245,242,238,0.2). Animation: scrollDot keyframe, 2s ease-in-out infinite.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FORMS ── -->
+  <div class="section" id="forms">
+    <div class="section-header">
+      <span class="section-num">03 — Components</span>
+      <div class="section-title">Form Inputs</div>
+      <p class="section-desc">Minimal, borderless-feeling inputs on a dark ground. One class handles text inputs, email inputs, and textareas. All fields are optional by design — the contact process is discreet and low-friction.</p>
+    </div>
+
+    <div class="component-row">
+      <div class="component-cell">
+        <span class="component-cell-label">Default state</span>
+        <input class="kinari-input" type="text" placeholder="Name (optional)" style="margin-bottom:12px;" />
+        <input class="kinari-input" type="text" placeholder="How you would like to be contacted" style="margin-bottom:12px;" />
+        <textarea class="kinari-input" placeholder="Brief description of the matter (optional)" rows="4" style="resize:none;display:block;"></textarea>
+      </div>
+      <div class="component-cell">
+        <span class="component-cell-label">Specifications</span>
+        <div class="component-spec-list">
+          <div class="spec-row"><span class="spec-key">Background</span><span class="spec-val">rgba(255,255,255,0.04)</span></div>
+          <div class="spec-row"><span class="spec-key">Border</span><span class="spec-val">1px solid rgba(245,242,238,0.12)</span></div>
+          <div class="spec-row"><span class="spec-key">Color</span><span class="spec-val">#F5F2EE</span></div>
+          <div class="spec-row"><span class="spec-key">Placeholder</span><span class="spec-val">rgba(245,242,238,0.25)</span></div>
+          <div class="spec-row"><span class="spec-key">Padding</span><span class="spec-val">16px 20px</span></div>
+          <div class="spec-row"><span class="spec-key">Font</span><span class="spec-val">Inter 300, 14px</span></div>
+          <div class="spec-row"><span class="spec-key">Border-radius</span><span class="spec-val">1px</span></div>
+          <div class="spec-row"><span class="spec-key">Focus border</span><span class="spec-val">rgba(201,168,76,0.5)</span></div>
+          <div class="spec-row"><span class="spec-key">Outline</span><span class="spec-val">none</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rule"><span class="rule-label">Success / confirmation state</span></div>
+    <div style="border:1px solid rgba(201,168,76,0.2);padding:48px;max-width:480px;border-radius:1px;">
+      <p style="font-family:var(--font-display);font-size:24px;font-weight:300;color:rgba(201,168,76,0.85);letter-spacing:0.02em;margin-bottom:12px;">Your enquiry has been received.</p>
+      <p style="font-family:var(--font-body);font-size:12px;font-weight:300;color:rgba(245,242,238,0.35);letter-spacing:0.05em;">We will respond within two business days.</p>
+    </div>
+    <div class="note" style="margin-top:24px;">Success state: Cormorant Garamond 300 24px in gold-85 for the confirmation line. Inter 300 12px dim for the follow-up. Border: 1px solid rgba(201,168,76,0.2).</div>
+  </div>
+
+  <!-- ── MOTION ── -->
+  <div class="section" id="motion">
+    <div class="section-header">
+      <span class="section-num">03 — Components</span>
+      <div class="section-title">Motion</div>
+      <p class="section-desc">Motion is restrained and purposeful. Two systems: scroll-reveal for content entrance, scroll-position for the Hero animation. No decorative or looping animations beyond the scroll indicator.</p>
+    </div>
+
+    <div class="motion-row">
+      <div class="motion-cell">
+        <span class="motion-label">Scroll reveal — entrance</span>
+        <div class="motion-value">opacity 0 → 1 + translateY(28px → 0)</div>
+        <div class="motion-note">Duration: 0.75s · Easing: cubic-bezier(0.25, 0.46, 0.45, 0.94) · Trigger: Intersection Observer (threshold 0.15)</div>
+      </div>
+      <div class="motion-cell">
+        <span class="motion-label">Stagger delays</span>
+        <div class="motion-value">100ms · 200ms · 300ms · 400ms · 500ms · 600ms</div>
+        <div class="motion-note">Applied via data-reveal-delay attribute. Use sequentially on grouped elements (cards, steps).</div>
+      </div>
+    </div>
+
+    <div class="motion-row">
+      <div class="motion-cell">
+        <span class="motion-label">Hero frame animation</span>
+        <div class="motion-value">90 PNG frames · scroll-position driven</div>
+        <div class="motion-note">Container: 220vh. Sticky section: 100vh. Frame index = floor(progress × 90). All frames preloaded on mount.</div>
+      </div>
+      <div class="motion-cell">
+        <span class="motion-label">Hero parallax</span>
+        <div class="motion-value">translateY(scrolled × 0.08)</div>
+        <div class="motion-note">Applied to background layer. Passive scroll listener. willChange: transform.</div>
+      </div>
+    </div>
+
+    <div class="motion-row">
+      <div class="motion-cell">
+        <span class="motion-label">Hover transitions</span>
+        <div class="motion-value">0.3s – 0.4s ease</div>
+        <div class="motion-note">Colour/border transitions: 0.4s ease (buttons). Text colour: 0.3s ease (links, nav). No transform on hover.</div>
+      </div>
+      <div class="motion-cell">
+        <span class="motion-label">Nav overlay</span>
+        <div class="motion-value">opacity transition 0.3s ease</div>
+        <div class="motion-note">Full-screen overlay appears/disappears via conditional render. No slide or scale — clean fade only.</div>
+      </div>
+    </div>
+
+    <div class="note">The scroll indicator uses a continuous keyframe animation (scrollDot, 2s ease-in-out infinite). This is the only looping animation on the site.</div>
+  </div>
+
+  <!-- ── VOICE ── -->
+  <div class="section" id="voice">
+    <div class="section-header">
+      <span class="section-num">04 — Usage</span>
+      <div class="section-title">Voice &amp; Tone</div>
+      <p class="section-desc">The MM Intelligence voice is precise, institutional, and understated. We speak in full sentences, avoid superlatives, and let the quality of work speak without promotional language.</p>
+    </div>
+
+    <div class="voice-pair">
+      <div class="voice-cell do">
+        <div class="voice-cell-label">Use</div>
+        <div class="voice-text">Technical analysis to support structured evidencing and defensible narratives.</div>
+      </div>
+      <div class="voice-cell dont">
+        <div class="voice-cell-label">Avoid</div>
+        <div class="voice-text">Industry-leading cutting-edge blockchain forensics solutions.</div>
+      </div>
+    </div>
+    <div class="voice-pair">
+      <div class="voice-cell do">
+        <div class="voice-cell-label">Use</div>
+        <div class="voice-text">We keep biographies brief and avoid operational detail.</div>
+      </div>
+      <div class="voice-cell dont">
+        <div class="voice-cell-label">Avoid</div>
+        <div class="voice-text">Meet our amazing team of crypto experts!</div>
+      </div>
+    </div>
+    <div class="voice-pair">
+      <div class="voice-cell do">
+        <div class="voice-cell-label">Use</div>
+        <div class="voice-text">Operational intelligence for digital wealth.</div>
+      </div>
+      <div class="voice-cell dont">
+        <div class="voice-cell-label">Avoid</div>
+        <div class="voice-text">The #1 platform for digital asset intelligence!</div>
+      </div>
+    </div>
+    <div class="voice-pair" style="margin-bottom:0;">
+      <div class="voice-cell do">
+        <div class="voice-cell-label">Use</div>
+        <div class="voice-text">Start a Confidential Discussion.</div>
+      </div>
+      <div class="voice-cell dont">
+        <div class="voice-cell-label">Avoid</div>
+        <div class="voice-text">Get Started Free! Book a Demo!</div>
+      </div>
+    </div>
+
+    <div class="rule"><span class="rule-label">Tone principles</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);">
+      <div style="background:var(--bg);padding:32px 36px;">
+        <p style="font-family:var(--font-body);font-size:10px;font-weight:300;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold-50);margin-bottom:12px;">Precision over volume</p>
+        <p style="font-family:var(--font-body);font-size:13px;font-weight:300;color:var(--text-muted);line-height:1.75;">Fewer words, precisely chosen. Every sentence earns its place.</p>
+      </div>
+      <div style="background:var(--bg);padding:32px 36px;">
+        <p style="font-family:var(--font-body);font-size:10px;font-weight:300;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold-50);margin-bottom:12px;">Institutional confidence</p>
+        <p style="font-family:var(--font-body);font-size:13px;font-weight:300;color:var(--text-muted);line-height:1.75;">No hedging, no hype. State what is done, not how impressive it is.</p>
+      </div>
+      <div style="background:var(--bg);padding:32px 36px;">
+        <p style="font-family:var(--font-body);font-size:10px;font-weight:300;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold-50);margin-bottom:12px;">Discretion as default</p>
+        <p style="font-family:var(--font-body);font-size:13px;font-weight:300;color:var(--text-muted);line-height:1.75;">Client confidentiality is a product feature, not just a legal obligation. Language reflects this.</p>
+      </div>
+      <div style="background:var(--bg);padding:32px 36px;">
+        <p style="font-family:var(--font-body);font-size:10px;font-weight:300;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold-50);margin-bottom:12px;">British spelling</p>
+        <p style="font-family:var(--font-body);font-size:13px;font-weight:300;color:var(--text-muted);line-height:1.75;">Use evidencing, not evidencing; organisation not organization; favour not favor.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── DON'T ── -->
+  <div class="section" id="dont">
+    <div class="section-header">
+      <span class="section-num">04 — Usage</span>
+      <div class="section-title">What to Avoid</div>
+      <p class="section-desc">Hard rules. These protect the brand's institutional character and prevent visual dilution.</p>
+    </div>
+
+    <div class="do-dont-grid">
+      <div class="do-dont-cell">
+        <span class="do-dont-label do">✓ Do</span>
+        <p class="do-dont-text">Use Cormorant Garamond at weight 300 (light) for all display and headline use. The lightness creates the institutional, editorial quality.</p>
+      </div>
+      <div class="do-dont-cell">
+        <span class="do-dont-label dont">✗ Don't</span>
+        <p class="do-dont-text">Use Cormorant Garamond at weight 400 or 500 for headlines. Never bold the display font.</p>
+      </div>
+    </div>
+    <div class="do-dont-grid">
+      <div class="do-dont-cell">
+        <span class="do-dont-label do">✓ Do</span>
+        <p class="do-dont-text">Use gold (#C9A84C) exclusively for: the wordmark, section labels, hover states, scroll indicator, and active nav links.</p>
+      </div>
+      <div class="do-dont-cell">
+        <span class="do-dont-label dont">✗ Don't</span>
+        <p class="do-dont-text">Use any other accent colour. Never use blue, green, red, or any saturated colour in any UI element.</p>
+      </div>
+    </div>
+    <div class="do-dont-grid">
+      <div class="do-dont-cell">
+        <span class="do-dont-label do">✓ Do</span>
+        <p class="do-dont-text">Use border-radius of 0px (panels, cards) or 1px (buttons, inputs) exclusively.</p>
+      </div>
+      <div class="do-dont-cell">
+        <span class="do-dont-label dont">✗ Don't</span>
+        <p class="do-dont-text">Use rounded corners (4px, 8px, 50% pill) on any element. They conflict with the architectural, precise character of the brand.</p>
+      </div>
+    </div>
+    <div class="do-dont-grid">
+      <div class="do-dont-cell">
+        <span class="do-dont-label do">✓ Do</span>
+        <p class="do-dont-text">Use generous vertical padding (96–128px per section). Whitespace communicates restraint and confidence.</p>
+      </div>
+      <div class="do-dont-cell">
+        <span class="do-dont-label dont">✗ Don't</span>
+        <p class="do-dont-text">Compress sections to fit more content. If content doesn't fit, reduce content — not padding.</p>
+      </div>
+    </div>
+    <div class="do-dont-grid" style="margin-bottom:0;">
+      <div class="do-dont-cell">
+        <span class="do-dont-label do">✓ Do</span>
+        <p class="do-dont-text">Open all external links (mmlaw.global) in a new tab with rel="noopener noreferrer".</p>
+      </div>
+      <div class="do-dont-cell">
+        <span class="do-dont-label dont">✗ Don't</span>
+        <p class="do-dont-text">Add drop shadows, box-shadows (beyond blur in glass-panel), gradients on text, or any skeuomorphic effects.</p>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+  // Active nav highlighting on scroll
+  const sections = document.querySelectorAll('[id]');
+  const navLinks = document.querySelectorAll('.nav a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + entry.target.id) {
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -75% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
