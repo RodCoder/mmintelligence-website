@@ -135,8 +135,8 @@ export function Hero(): JSX.Element {
           flexDirection: isMobile ? 'column' : 'row',
           height: '100%',
           alignItems: 'center',
-          justifyContent: isMobile ? 'center' : 'space-between',
-          padding: isMobile ? '0 20px' : isTablet ? '0 32px' : '0 56px',
+          justifyContent: isMobile ? 'flex-start' : 'space-between',
+          padding: isMobile ? '100px 20px 20px' : isTablet ? '0 32px' : '0 56px',
           gap: isMobile ? '24px' : '0',
         }}>
           <div style={{ width: isMobile ? '100%' : isTablet ? '60%' : '55%' }}>
