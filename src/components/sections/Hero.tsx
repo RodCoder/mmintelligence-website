@@ -139,7 +139,7 @@ export function Hero(): JSX.Element {
           padding: isMobile ? '100px 20px 20px' : isTablet ? '0 32px' : '0 56px',
           gap: isMobile ? '24px' : '0',
         }}>
-          <div style={{ width: isMobile ? '100%' : isTablet ? '60%' : '55%' }}>
+          <div style={{ width: isMobile ? '100%' : isTablet ? '60%' : '55%', position: 'relative', zIndex: 1 }}>
             {/* Main headline */}
             <h1
               style={{
@@ -180,26 +180,47 @@ export function Hero(): JSX.Element {
             </button>
           </div>
 
-          {/* Frame animation — canvas instead of img swapping */}
-          <div style={{
-            width: isMobile ? '100%' : isTablet ? '40%' : '45%',
-            padding: isMobile ? '0' : isTablet ? '40px' : '80px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
+          {/* Frame animation — behind text on mobile, side-by-side on desktop */}
+          {!isMobile && (
+            <div style={{
+              width: isTablet ? '40%' : '45%',
+              padding: isTablet ? '40px' : '80px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+              <canvas
+                ref={canvasRef}
+                style={{
+                  width: '100%',
+                  maxWidth: '520px',
+                  height: 'auto',
+                  display: 'block',
+                  userSelect: 'none',
+                  pointerEvents: 'none',
+                }}
+              />
+            </div>
+          )}
+
+          {/* Mobile: canvas as subtle background behind text */}
+          {isMobile && (
             <canvas
               ref={canvasRef}
               style={{
-                width: '100%',
-                maxWidth: isMobile ? '280px' : '520px',
+                position: 'absolute',
+                right: '-15%',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                width: '75%',
                 height: 'auto',
-                display: 'block',
-                userSelect: 'none',
+                opacity: 0.2,
                 pointerEvents: 'none',
+                userSelect: 'none',
+                zIndex: 0,
               }}
             />
-          </div>
+          )}
         </div>
 
         {/* Scroll indicator — hidden on mobile */}
