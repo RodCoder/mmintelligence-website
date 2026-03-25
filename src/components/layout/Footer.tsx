@@ -1,8 +1,10 @@
 import React from 'react';
 import mmiLogoGrey from '../../assets/images/mmi-logo-grey.svg';
 import mmlawLogoGrey from '../../assets/images/mmlaw-logo-grey.svg';
+import { useBreakpoint } from '../hooks/useBreakpoint';
 
 export function Footer(): JSX.Element {
+  const { isMobile, isTablet } = useBreakpoint();
   const scrollTo = (id: string) =>
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
@@ -17,17 +19,19 @@ export function Footer(): JSX.Element {
         style={{
           maxWidth: '1200px',
           margin: '0 auto',
-          padding: '0 56px',
+          padding: isMobile ? '0 20px' : isTablet ? '0 32px' : '0 56px',
         }}>
 
         {/* Main footer row */}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: '1fr auto 1fr',
-            alignItems: 'start',
-            gap: '40px',
+            gridTemplateColumns: isMobile ? '1fr' : '1fr auto 1fr',
+            alignItems: isMobile ? 'center' : 'start',
+            justifyItems: isMobile ? 'center' : undefined,
+            gap: isMobile ? '32px' : isTablet ? '24px' : '40px',
             marginBottom: '56px',
+            textAlign: isMobile ? 'center' : undefined,
           }}>
 
           {/* Left — MMI grey logo */}
@@ -38,7 +42,7 @@ export function Footer(): JSX.Element {
           />
 
           {/* Center — nav */}
-          <nav style={{ display: 'flex', gap: '32px' }}>
+          <nav style={{ display: 'flex', gap: isMobile ? '24px' : '32px' }}>
             {[
               { label: 'Privacy Policy', id: 'home' },
               { label: 'Terms of Use', id: 'home' },
@@ -66,7 +70,7 @@ export function Footer(): JSX.Element {
           </nav>
 
           {/* Right — MMLaw grey logo + legal note */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '8px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: isMobile ? 'center' : 'flex-end', gap: '8px' }}>
             <img
               src={mmlawLogoGrey}
               alt="MMLaw"
@@ -79,15 +83,15 @@ export function Footer(): JSX.Element {
                 fontWeight: 300,
                 color: 'rgba(245,242,238,0.25)',
                 lineHeight: 1.75,
-                textAlign: 'right',
+                textAlign: isMobile ? 'center' : 'right',
               }}>
-              Legal advice and certification are <br/> led by MMLaw where required.
+              Legal advice and certification are {!isMobile && <br/>} led by MMLaw where required.
             </p>
           </div>
         </div>
 
         {/* Divider */}
-        <div style={{ height: '1px', background: 'rgba(245,242,238,0.05)', margin: '0 -56px' }} />
+        <div style={{ height: '1px', background: 'rgba(245,242,238,0.05)', margin: isMobile ? '0 -20px' : isTablet ? '0 -32px' : '0 -56px' }} />
 
         {/* Bottom row */}
         <div style={{ padding: '28px 0 40px', textAlign: 'center' }}>

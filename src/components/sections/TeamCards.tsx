@@ -1,4 +1,5 @@
 import React from 'react';
+import { useBreakpoint } from '../hooks/useBreakpoint';
 
 interface TeamMember {
   role: string;
@@ -30,35 +31,38 @@ const teamMembers: TeamMember[] = [
 ];
 
 export function TeamCards(): JSX.Element {
+  const { isMobile, isTablet } = useBreakpoint();
+  const px = isMobile ? '0 20px' : isTablet ? '0 32px' : '0 56px';
+
   return (
     <section
       style={{
-        padding: '94px 0 128px',
+        padding: isMobile ? '64px 0 80px' : '94px 0 128px',
         backgroundColor: '#0A0A0A',
       }}>
       <div
         style={{
           maxWidth: '1200px',
           margin: '0 auto',
-          padding: '0 56px',
+          padding: px,
         }}>
 
         <span
           className="section-label"
           data-reveal
-          style={{ textAlign: 'center', display: 'block', marginBottom: '64px' }}>
+          style={{ textAlign: 'center', display: 'block', marginBottom: isMobile ? '40px' : '64px' }}>
           Team
         </span>
 
-        {/* 4-column grid */}
+        {/* Grid */}
         <div
           data-reveal
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
+            gridTemplateColumns: isMobile ? '1fr' : isTablet ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)',
             gap: '1px',
             background: 'rgba(117,98,47,0.06)',
-            marginBottom: '80px',
+            marginBottom: isMobile ? '48px' : '80px',
           }}>
           {teamMembers.map((member, i) => (
             <div
@@ -96,7 +100,7 @@ export function TeamCards(): JSX.Element {
                 <p
                   style={{
                     fontFamily: "'Montserrat', sans-serif",
-                    fontSize: '14px',
+                    fontSize: isMobile ? '13px' : '14px',
                     fontWeight: 600,
                     color: '#75622f',
                     lineHeight: '20.8px',
@@ -109,7 +113,7 @@ export function TeamCards(): JSX.Element {
                 <p
                   style={{
                     fontFamily: "'Montserrat', sans-serif",
-                    fontSize: '14px',
+                    fontSize: isMobile ? '13px' : '14px',
                     fontWeight: 300,
                     color: 'rgba(245,242,238,0.6)',
                     lineHeight: '20.8px',
@@ -129,10 +133,10 @@ export function TeamCards(): JSX.Element {
           <p
             style={{
               fontFamily: "'Cormorant Garamond', Georgia, serif",
-              fontSize: '24px',
+              fontSize: isMobile ? '20px' : '24px',
               fontWeight: 700,
               color: '#F5F2EE',
-              lineHeight: '38px',
+              lineHeight: isMobile ? '30px' : '38px',
               marginBottom: '8px',
             }}>
             Specialist. Compact. Confidential.
@@ -140,10 +144,10 @@ export function TeamCards(): JSX.Element {
           <p
             style={{
               fontFamily: "'Cormorant Garamond', Georgia, serif",
-              fontSize: '24px',
+              fontSize: isMobile ? '18px' : '24px',
               fontWeight: 400,
               color: 'rgba(245,242,238,0.7)',
-              lineHeight: '38px',
+              lineHeight: isMobile ? '28px' : '38px',
               marginBottom: '8px',
             }}>
             MM Intelligence operates with a focused team of senior technical and governance professionals dedicated to the structured oversight of digital and cross-border wealth environments.
@@ -151,10 +155,10 @@ export function TeamCards(): JSX.Element {
           <p
             style={{
               fontFamily: "'Cormorant Garamond', Georgia, serif",
-              fontSize: '24px',
+              fontSize: isMobile ? '18px' : '24px',
               fontWeight: 400,
               color: 'rgba(245,242,238,0.7)',
-              lineHeight: '38px',
+              lineHeight: isMobile ? '28px' : '38px',
             }}>
             Professional biographies are intentionally limited. Detailed credentials are shared within formal engagement parameters.
           </p>

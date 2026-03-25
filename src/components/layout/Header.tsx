@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import logoSrc from '../../assets/images/mmi-logo-gold.svg';
 import mmlawLogoSrc from '../../assets/images/mmlaw-logo-gold.svg';
+import { useBreakpoint } from '../hooks/useBreakpoint';
 
 const navLinks = [
   { label: 'What we do', href: '#capabilities' },
@@ -16,6 +17,7 @@ function scrollTo(id: string) {
 
 export function Header(): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
+  const { isMobile, isTablet } = useBreakpoint();
 
   const handleNav = (href: string) => {
     setIsOpen(false);
@@ -38,14 +40,14 @@ export function Header(): JSX.Element {
           style={{
             maxWidth: '1440px',
             margin: '0 auto',
-            padding: '0 56px',
-            marginTop: '60px',
+            padding: isMobile ? '0 20px' : isTablet ? '0 32px' : '0 56px',
+            marginTop: isMobile ? '24px' : isTablet ? '40px' : '60px',
             display: 'grid',
-            gridTemplateColumns: '1fr auto 1fr',
+            gridTemplateColumns: isMobile ? '1fr auto 1fr' : '1fr auto 1fr',
             alignItems: 'center',
           }}>
 
-          {/* Left — hamburger + MM LAW */}
+          {/* Left — hamburger */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '40px' }}>
             <button
               onClick={() => setIsOpen(true)}
@@ -56,11 +58,11 @@ export function Header(): JSX.Element {
                 padding: '4px',
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '6px',
+                gap: isMobile ? '5px' : '6px',
               }}
               aria-label="Open menu">
               {[0, 1, 2].map(i => (
-                <div key={i} style={{ width: '28px', height: '3px', background: '#75622f' }} />
+                <div key={i} style={{ width: isMobile ? '24px' : '28px', height: '3px', background: '#75622f' }} />
               ))}
             </button>
           </div>
@@ -80,40 +82,46 @@ export function Header(): JSX.Element {
             <img
               src={logoSrc}
               alt="MM Intelligence"
-              style={{ width: '80px', height: 'auto', display: 'block' }}
+              style={{ width: isMobile ? '56px' : isTablet ? '64px' : '80px', height: 'auto', display: 'block' }}
             />
           </button>
 
           {/* Right — "In collaboration with" + MMLAW logo */}
-          <a
-            href="https://mmlaw.global"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-end',
-              gap: '6px',
-              textDecoration: 'none',
-            }}>
-            <span
+          {!isMobile ? (
+            <a
+              href="https://mmlaw.global"
+              target="_blank"
+              rel="noopener noreferrer"
               style={{
-                fontFamily: "'Montserrat', sans-serif",
-                fontSize: '6px',
-                fontWeight: 400,
-                letterSpacing: '0.2em',
-                color: '#75622f',
-                textTransform: 'uppercase',
-                opacity: 0.6,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'flex-end',
+                gap: '6px',
+                textDecoration: 'none',
               }}>
-              In collaboration with
-            </span>
-            <img
-              src={mmlawLogoSrc}
-              alt="MMLaw"
-              style={{ height: '20px', width: 'auto', display: 'block' }}
-            />
-          </a>
+              {!isTablet && (
+                <span
+                  style={{
+                    fontFamily: "'Montserrat', sans-serif",
+                    fontSize: '6px',
+                    fontWeight: 400,
+                    letterSpacing: '0.2em',
+                    color: '#75622f',
+                    textTransform: 'uppercase',
+                    opacity: 0.6,
+                  }}>
+                  In collaboration with
+                </span>
+              )}
+              <img
+                src={mmlawLogoSrc}
+                alt="MMLaw"
+                style={{ height: isTablet ? '16px' : '20px', width: 'auto', display: 'block' }}
+              />
+            </a>
+          ) : (
+            <div />
+          )}
         </div>
       </header>
 
@@ -128,7 +136,7 @@ export function Header(): JSX.Element {
             style={{
               position: 'absolute',
               top: '28px',
-              right: '40px',
+              right: isMobile ? '20px' : '40px',
               background: 'none',
               border: 'none',
               color: 'rgba(245,242,238,0.4)',

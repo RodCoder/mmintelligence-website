@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useBreakpoint } from '../hooks/useBreakpoint';
 
 import frame1 from '../../assets/images/Frame 1.png';
 import frame2 from '../../assets/images/Frame 2.png';
@@ -47,6 +48,10 @@ const steps = [
 export function MethodologySteps(): JSX.Element {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeStep, setActiveStep] = useState(0);
+  const { isMobile, isTablet } = useBreakpoint();
+
+  const px = isMobile ? '20px' : isTablet ? '32px' : '56px';
+  const scrollMultiplier = isMobile ? 80 : 100;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -64,7 +69,7 @@ export function MethodologySteps(): JSX.Element {
   return (
     <div
       ref={containerRef}
-      style={{ height: `${steps.length * 100}vh`, position: 'relative' }}>
+      style={{ height: `${steps.length * scrollMultiplier}vh`, position: 'relative' }}>
 
       <div
         style={{
@@ -90,8 +95,9 @@ export function MethodologySteps(): JSX.Element {
           <div
             style={{
               position: 'absolute',
-              top: '160px',
-              left: '56px',
+              top: isMobile ? '80px' : '160px',
+              left: px,
+              right: px,
             }}>
             <span
               className="section-label"
@@ -103,7 +109,7 @@ export function MethodologySteps(): JSX.Element {
             <div style={{ maxWidth: '1088px' }}>
               <p style={{
                 fontFamily: "'Montserrat', sans-serif",
-                fontSize: '14px',
+                fontSize: isMobile ? '13px' : '14px',
                 fontWeight: 400,
                 color: '#F5F2EE',
                 lineHeight: '15px',
@@ -111,33 +117,36 @@ export function MethodologySteps(): JSX.Element {
               }}>
                 Structured. Standardised. Continuously Refined.
               </p>
-              <p style={{
-                fontFamily: "'Montserrat', sans-serif",
-                fontSize: '14px',
-                fontWeight: 300,
-                color: 'rgba(245,242,238,0.65)',
-                lineHeight: '15px',
-                maxWidth: '1088px',
-              }}>
-                We operate through a disciplined internal methodology applied across forensic reviews, wallet governance, family office structures and cybersecurity engagements. Our framework evolves continuously to improve evidencing standards, governance discipline and data protection.
-              </p>
+              {!isMobile && (
+                <p style={{
+                  fontFamily: "'Montserrat', sans-serif",
+                  fontSize: '14px',
+                  fontWeight: 300,
+                  color: 'rgba(245,242,238,0.65)',
+                  lineHeight: '15px',
+                  maxWidth: '1088px',
+                }}>
+                  We operate through a disciplined internal methodology applied across forensic reviews, wallet governance, family office structures and cybersecurity engagements. Our framework evolves continuously to improve evidencing standards, governance discipline and data protection.
+                </p>
+              )}
             </div>
           </div>
 
-          {/* Step content + images */}
+          {/* Step content */}
           {steps.map((s, i) => {
             const isActive = i === activeStep;
             const isPast = i < activeStep;
             const imageOnLeft = s.align === 'right';
+            const imgSize = isMobile ? '320px' : isTablet ? '240px' : '400px';
 
             return (
               <div
                 key={s.num}
                 style={{
                   position: 'absolute',
-                  top: '280px',
-                  left: '56px',
-                  right: '56px',
+                  top: isMobile ? '180px' : '280px',
+                  left: px,
+                  right: px,
                   opacity: isActive ? 1 : 0,
                   transform: isActive
                     ? 'translateY(0)'
@@ -153,52 +162,55 @@ export function MethodologySteps(): JSX.Element {
                       borderTop: '1px solid rgba(245,242,238,0.08)',
                       paddingTop: '20px',
                       display: 'flex',
-                      flexDirection: imageOnLeft ? 'row' : 'row-reverse',
-                      alignItems: 'flex-start',
-                      gap: '60px',
+                      flexDirection: isMobile
+                        ? 'column-reverse'
+                        : (imageOnLeft ? 'row' : 'row-reverse'),
+                      alignItems: isMobile ? 'center' : 'flex-start',
+                      gap: isMobile ? '24px' : isTablet ? '32px' : '60px',
                     }}>
 
                     {/* Image */}
                     <div style={{
-                      flexShrink: 0,
-                      width: '400px',
-                      height: '400px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      overflow: 'hidden',
-                    }}>
-                      <img
-                        src={s.image}
-                        alt=""
-                        style={{
-                          height: '400px',
-                          width: 'auto',
-                          objectFit: 'contain',
-                          opacity: 0.85,
-                          userSelect: 'none',
-                          pointerEvents: 'none',
-                        }}
-                      />
-                    </div>
+                        flexShrink: 0,
+                        width: imgSize,
+                        height: imgSize,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        overflow: 'hidden',
+                        marginTop: isMobile ? '40px' : undefined,
+                      }}>
+                        <img
+                          src={s.image}
+                          alt=""
+                          style={{
+                            height: imgSize,
+                            width: 'auto',
+                            objectFit: 'contain',
+                            opacity: 0.85,
+                            userSelect: 'none',
+                            pointerEvents: 'none',
+                          }}
+                        />
+                      </div>
 
                     {/* Text */}
                     <div style={{
                       flex: 1,
                       display: 'flex',
                       flexDirection: 'column',
-                      alignItems: s.align === 'right' ? 'flex-end' : 'flex-start',
+                      alignItems: isMobile ? 'flex-start' : (s.align === 'right' ? 'flex-end' : 'flex-start'),
                       gap: '16px',
                     }}>
                       <h2
                         style={{
                           fontFamily: "'Montserrat', sans-serif",
-                          fontSize: 'clamp(14px, 1.4vw, 16px)',
+                          fontSize: isMobile ? '14px' : 'clamp(14px, 1.4vw, 16px)',
                           fontWeight: 400,
                           color: '#F5F2EE',
                           letterSpacing: '0.11em',
                           textTransform: 'uppercase',
-                          textAlign: s.align === 'right' ? 'right' : 'left',
+                          textAlign: isMobile ? 'left' : (s.align === 'right' ? 'right' : 'left'),
                           maxWidth: '800px',
                           lineHeight: 1.2,
                           margin: 0,
@@ -209,12 +221,12 @@ export function MethodologySteps(): JSX.Element {
                       <p
                         style={{
                           fontFamily: "'Montserrat', sans-serif",
-                          fontSize: '14px',
+                          fontSize: isMobile ? '13px' : '14px',
                           fontWeight: 300,
                           color: 'rgba(245,242,238,0.65)',
                           lineHeight: 1.85,
                           maxWidth: '560px',
-                          textAlign: s.align === 'right' ? 'right' : 'left',
+                          textAlign: isMobile ? 'left' : (s.align === 'right' ? 'right' : 'left'),
                           margin: 0,
                         }}>
                         {s.body}
@@ -231,7 +243,7 @@ export function MethodologySteps(): JSX.Element {
             style={{
               position: 'absolute',
               top: '50%',
-              right: '56px',
+              right: px,
               transform: 'translateY(-50%)',
               display: 'flex',
               flexDirection: 'column',
@@ -255,14 +267,14 @@ export function MethodologySteps(): JSX.Element {
           <div
             style={{
               position: 'absolute',
-              bottom: '48px',
-              left: '56px',
-              right: '56px',
+              bottom: isMobile ? '24px' : '48px',
+              left: px,
+              right: px,
               textAlign: 'center',
             }}>
             <p style={{
               fontFamily: "'Montserrat', sans-serif",
-              fontSize: '12px',
+              fontSize: isMobile ? '11px' : '12px',
               fontWeight: 800,
               color: 'rgba(245,242,238,0.4)',
               letterSpacing: '0.05em',
@@ -271,19 +283,21 @@ export function MethodologySteps(): JSX.Element {
             }}>
               Controlled Environment
             </p>
-            <p style={{
-              fontFamily: "'Montserrat', sans-serif",
-              fontSize: '12px',
-              fontWeight: 300,
-              color: 'rgba(245,242,238,0.4)',
-              letterSpacing: '0.05em',
-              lineHeight: '18px',
-            }}>
-              All stages are conducted within our internal systems.<br />
-              We do not rely on third-party analytical platforms.<br />
-              Access to client data is restricted, logged and governed by defined internal protocols.<br />
-              Where appropriate, supervised internal AI workflows support review accuracy without external data exposure.
-            </p>
+            {!isMobile && (
+              <p style={{
+                fontFamily: "'Montserrat', sans-serif",
+                fontSize: '12px',
+                fontWeight: 300,
+                color: 'rgba(245,242,238,0.4)',
+                letterSpacing: '0.05em',
+                lineHeight: '18px',
+              }}>
+                All stages are conducted within our internal systems.<br />
+                We do not rely on third-party analytical platforms.<br />
+                Access to client data is restricted, logged and governed by defined internal protocols.<br />
+                Where appropriate, supervised internal AI workflows support review accuracy without external data exposure.
+              </p>
+            )}
           </div>
         </div>
       </div>

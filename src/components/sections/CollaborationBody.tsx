@@ -1,37 +1,41 @@
 import React from 'react';
 import collabVideo from '../../assets/images/in-collab-video.mp4';
+import { useBreakpoint } from '../hooks/useBreakpoint';
 
 export function CollaborationBody(): JSX.Element {
+  const { isMobile, isTablet } = useBreakpoint();
+  const px = isMobile ? '0 20px' : isTablet ? '0 32px' : '0 56px';
+
   return (
     <section
       style={{
-        padding: '128px 0',
-        background: 'linear-gradient(180deg, #0A0A0A 3.4%, rgba(17,17,17,0.2) 34%), linear-gradient(0deg, #0A0A0A 1.4%, rgba(17,17,17,0.2) 45%), linear-gradient(90deg, #111 0%, #111 100%)',
+        padding: isMobile ? '64px 0' : '128px 0',
+        background: 'linear-gradient(180deg, #0A0A0A 0%, #111111 30%, #111111 70%, #0A0A0A 100%)',
       }}>
       <div
         style={{
           maxWidth: '1200px',
           margin: '0 auto',
-          padding: '0 56px',
+          padding: px,
           display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: '80px',
+          gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+          gap: isMobile ? '40px' : isTablet ? '48px' : '80px',
           alignItems: 'center',
         }}>
 
         {/* Left column */}
         <div data-reveal>
-          <span className="section-label" style={{ marginBottom: '40px', fontWeight: 500 }}>Collaboration</span>
+          <span className="section-label" style={{ marginBottom: isMobile ? '24px' : '40px', fontWeight: 500 }}>Collaboration</span>
 
           <h2
             style={{
               fontFamily: "'Cormorant Garamond', Georgia, serif",
-              fontSize: 'clamp(36px, 4vw, 56px)',
+              fontSize: isMobile ? 'clamp(28px, 8vw, 40px)' : 'clamp(36px, 4vw, 56px)',
               fontWeight: 300,
               color: '#F5F2EE',
               lineHeight: 1.1,
               letterSpacing: '-0.02em',
-              marginBottom: '40px',
+              marginBottom: isMobile ? '24px' : '40px',
             }}>
             In collaboration with MMLaw
           </h2>
@@ -39,7 +43,7 @@ export function CollaborationBody(): JSX.Element {
           <p
             style={{
               fontFamily: "'Montserrat', sans-serif",
-              fontSize: '15px',
+              fontSize: isMobile ? '14px' : '15px',
               fontWeight: 300,
               color: 'rgba(245,242,238,0.6)',
               lineHeight: '20px',
@@ -51,11 +55,11 @@ export function CollaborationBody(): JSX.Element {
           <p
             style={{
               fontFamily: "'Montserrat', sans-serif",
-              fontSize: '15px',
+              fontSize: isMobile ? '14px' : '15px',
               fontWeight: 300,
               color: 'rgba(245,242,238,0.6)',
               lineHeight: '20px',
-              marginBottom: '48px',
+              marginBottom: isMobile ? '32px' : '48px',
             }}>
             Our work is coordinated to ensure that operational, technical and legal aspects align within a structured and coherent framework.
           </p>
@@ -112,14 +116,14 @@ export function CollaborationBody(): JSX.Element {
 
             {/* Corner labels */}
             <span style={{
-              position: 'absolute', top: '24px', left: '24px', zIndex: 2,
+              position: 'absolute', top: isMobile ? '16px' : '24px', left: isMobile ? '16px' : '24px', zIndex: 2,
               fontFamily: "'Montserrat', sans-serif", fontSize: '9px', fontWeight: 300,
               letterSpacing: '0.18em', textTransform: 'uppercase', color: '#75622f',
             }}>
               digital
             </span>
             <span style={{
-              position: 'absolute', top: '24px', right: '24px', zIndex: 2,
+              position: 'absolute', top: isMobile ? '16px' : '24px', right: isMobile ? '16px' : '24px', zIndex: 2,
               fontFamily: "'Montserrat', sans-serif", fontSize: '9px', fontWeight: 300,
               letterSpacing: '0.18em', textTransform: 'uppercase', color: '#75622f',
               textAlign: 'right',
@@ -127,14 +131,14 @@ export function CollaborationBody(): JSX.Element {
               tax
             </span>
             <span style={{
-              position: 'absolute', bottom: '24px', left: '24px', zIndex: 2,
+              position: 'absolute', bottom: isMobile ? '16px' : '24px', left: isMobile ? '16px' : '24px', zIndex: 2,
               fontFamily: "'Montserrat', sans-serif", fontSize: '9px', fontWeight: 300,
               letterSpacing: '0.18em', textTransform: 'uppercase', color: '#75622f',
             }}>
               security
             </span>
             <span style={{
-              position: 'absolute', bottom: '24px', right: '24px', zIndex: 2,
+              position: 'absolute', bottom: isMobile ? '16px' : '24px', right: isMobile ? '16px' : '24px', zIndex: 2,
               fontFamily: "'Montserrat', sans-serif", fontSize: '9px', fontWeight: 300,
               letterSpacing: '0.18em', textTransform: 'uppercase', color: '#75622f',
               textAlign: 'right',

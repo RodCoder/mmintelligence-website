@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import contactBgVideo from '../../assets/images/contact-form-video.mp4';
+import { useBreakpoint } from '../hooks/useBreakpoint';
 
 export function ContactForm(): JSX.Element {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [description, setDescription] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const { isMobile, isTablet } = useBreakpoint();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,11 +21,11 @@ export function ContactForm(): JSX.Element {
         borderTop: '1px solid rgba(245,242,238,0.06)',
         position: 'relative',
         overflow: 'hidden',
-        minHeight: '720px',
+        minHeight: isMobile ? 'auto' : '720px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '96px 0',
+        padding: isMobile ? '48px 0' : isTablet ? '64px 0' : '96px 0',
         backgroundColor: '#0A0A0A',
       }}>
 
@@ -62,7 +64,7 @@ export function ContactForm(): JSX.Element {
           width: '100%',
           maxWidth: '780px',
           margin: '0 auto',
-          padding: '0 24px',
+          padding: isMobile ? '0 16px' : '0 24px',
         }}>
 
         <div
@@ -70,7 +72,7 @@ export function ContactForm(): JSX.Element {
             background: '#111111',
             border: '1px solid rgba(245,242,238,0.08)',
             borderRadius: '2px',
-            padding: '64px',
+            padding: isMobile ? '32px 20px' : isTablet ? '40px 32px' : '64px',
           }}>
 
           <span
@@ -84,7 +86,7 @@ export function ContactForm(): JSX.Element {
               <h2
                 style={{
                   fontFamily: "'Cormorant Garamond', Georgia, serif",
-                  fontSize: 'clamp(36px, 4vw, 46px)',
+                  fontSize: isMobile ? 'clamp(28px, 8vw, 36px)' : 'clamp(36px, 4vw, 46px)',
                   fontWeight: 300,
                   color: '#F5F2EE',
                   lineHeight: 1.2,
