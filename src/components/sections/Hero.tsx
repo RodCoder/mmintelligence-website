@@ -110,7 +110,7 @@ export function Hero(): JSX.Element {
   };
 
   return (
-    <div ref={containerRef} style={{ height: isMobile ? '180vh' : '220vh', background: 'linear-gradient(180deg, #101010 80%, #0A0A0A 100%)' }}>
+    <div ref={containerRef} style={{ height: isMobile ? '180vh' : '220vh', backgroundColor: '#101010' }}>
       <section
         style={{
           position: 'sticky',
