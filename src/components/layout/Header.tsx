@@ -40,8 +40,8 @@ export function Header(): JSX.Element {
           style={{
             maxWidth: '1440px',
             margin: '0 auto',
-            padding: isMobile ? '0 20px' : isTablet ? '0 32px' : '0 56px',
-            marginTop: isMobile ? '24px' : isTablet ? '40px' : '60px',
+            padding: isMobile ? '0 20px' : isTablet ? '0 32px' : '0 56px 8px',
+            marginTop: isMobile ? '24px' : '40px',
             display: 'grid',
             gridTemplateColumns: isMobile ? '1fr auto 1fr' : '1fr auto 1fr',
             alignItems: 'center',
