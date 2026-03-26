@@ -25,7 +25,7 @@ export function ContactForm(): JSX.Element {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: isMobile ? '48px 0' : isTablet ? '64px 0' : '96px 0',
+        padding: isMobile ? '64px 0' : '128px 0',
         backgroundColor: '#0A0A0A',
       }}>
 
@@ -62,9 +62,9 @@ export function ContactForm(): JSX.Element {
           position: 'relative',
           zIndex: 1,
           width: '100%',
-          maxWidth: '780px',
+          maxWidth: '1200px',
           margin: '0 auto',
-          padding: isMobile ? '0 16px' : '0 24px',
+          padding: isMobile ? '0 20px' : isTablet ? '0 32px' : '0 56px',
         }}>
 
         <div
@@ -77,7 +77,7 @@ export function ContactForm(): JSX.Element {
 
           <span
             className="section-label"
-            style={{ textAlign: 'center', display: 'block', marginBottom: '16px' }}>
+            style={{ textAlign: 'center', display: 'block', marginBottom: '16px', fontWeight: 500 }}>
             Contact
           </span>
 
@@ -145,7 +145,7 @@ export function ContactForm(): JSX.Element {
                     borderRadius: '1px',
                     transition: 'border-color 0.3s ease',
                   }}
-                  onMouseEnter={(e) => { (e.currentTarget).style.borderColor = 'rgba(201,168,76,0.6)'; }}
+                  onMouseEnter={(e) => { (e.currentTarget).style.borderColor = 'rgba(117,98,47,0.6)'; }}
                   onMouseLeave={(e) => { (e.currentTarget).style.borderColor = 'rgba(117,98,47,0.3)'; }}>
                   Submit Enquiry
                 </button>
@@ -158,7 +158,7 @@ export function ContactForm(): JSX.Element {
                   fontFamily: "'Cormorant Garamond', Georgia, serif",
                   fontSize: '28px',
                   fontWeight: 300,
-                  color: 'rgba(201,168,76,0.85)',
+                  color: 'rgba(117,98,47,0.85)',
                   letterSpacing: '0.02em',
                   marginBottom: '12px',
                 }}>

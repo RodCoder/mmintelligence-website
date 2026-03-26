@@ -57,12 +57,12 @@ export function MMLawCrossLink({ variant }: MMLawCrossLinkProps): JSX.Element {
                 fontWeight: 300,
                 letterSpacing: '0.2em',
                 textTransform: 'uppercase',
-                color: 'rgba(201,168,76,0.8)',
+                color: 'rgba(117,98,47,0.8)',
                 textDecoration: 'none',
                 transition: 'color 0.3s ease',
               }}
-              onMouseEnter={(e) => { (e.target as HTMLAnchorElement).style.color = '#C9A84C'; }}
-              onMouseLeave={(e) => { (e.target as HTMLAnchorElement).style.color = 'rgba(201,168,76,0.8)'; }}>
+              onMouseEnter={(e) => { (e.target as HTMLAnchorElement).style.color = '#75622F'; }}
+              onMouseLeave={(e) => { (e.target as HTMLAnchorElement).style.color = 'rgba(117,98,47,0.8)'; }}>
               → MMLaw
             </a>
           </div>
@@ -100,12 +100,12 @@ export function MMLawCrossLink({ variant }: MMLawCrossLinkProps): JSX.Element {
           fontWeight: 300,
           letterSpacing: '0.18em',
           textTransform: 'uppercase',
-          color: 'rgba(201,168,76,0.75)',
+          color: 'rgba(117,98,47,0.75)',
           textDecoration: 'none',
           transition: 'color 0.3s ease',
         }}
-        onMouseEnter={(e) => { (e.target as HTMLAnchorElement).style.color = '#C9A84C'; }}
-        onMouseLeave={(e) => { (e.target as HTMLAnchorElement).style.color = 'rgba(201,168,76,0.75)'; }}>
+        onMouseEnter={(e) => { (e.target as HTMLAnchorElement).style.color = '#75622F'; }}
+        onMouseLeave={(e) => { (e.target as HTMLAnchorElement).style.color = 'rgba(117,98,47,0.75)'; }}>
         → MMLaw
       </a>
     </div>

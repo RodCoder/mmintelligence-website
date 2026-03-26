@@ -86,8 +86,8 @@ export function CollaborationBody(): JSX.Element {
             }}
             onMouseEnter={(e) => {
               const el = e.currentTarget;
-              el.style.borderColor = 'rgba(201,168,76,0.5)';
-              el.style.color = 'rgba(201,168,76,0.8)';
+              el.style.borderColor = 'rgba(117,98,47,0.5)';
+              el.style.color = 'rgba(117,98,47,0.8)';
             }}
             onMouseLeave={(e) => {
               const el = e.currentTarget;

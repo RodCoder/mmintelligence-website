@@ -37,7 +37,7 @@ export function TeamCards(): JSX.Element {
   return (
     <section
       style={{
-        padding: isMobile ? '64px 0 80px' : '94px 0 128px',
+        padding: isMobile ? '64px 0' : '128px 0',
         backgroundColor: '#0A0A0A',
       }}>
       <div
@@ -50,7 +50,7 @@ export function TeamCards(): JSX.Element {
         <span
           className="section-label"
           data-reveal
-          style={{ textAlign: 'center', display: 'block', marginBottom: isMobile ? '40px' : '64px' }}>
+          style={{ textAlign: 'left', display: 'block', marginBottom: isMobile ? '40px' : '64px', fontWeight: 500 }}>
           Team
         </span>
 

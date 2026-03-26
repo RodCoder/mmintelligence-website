@@ -72,7 +72,7 @@ export function SupportGoals(): JSX.Element {
                   fontFamily: "'Cormorant Garamond', Georgia, serif",
                   fontSize: isMobile ? '16px' : '18px',
                   fontWeight: 300,
-                  color: 'rgba(201,168,76,0.5)',
+                  color: 'rgba(117,98,47,0.5)',
                   minWidth: '32px',
                   lineHeight: '38px',
                 }}>

@@ -111,17 +111,17 @@
   text-decoration: none;
 }
 .kinari-btn:hover {
-  border-color: #C9A84C;
-  color: #C9A84C;
+  border-color: #75622F;
+  color: #75622F;
 }
 /* ─── Section Label ─── */
 .section-label {
   font-family: 'Montserrat', sans-serif;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 300;
   letter-spacing: 0.35em;
   text-transform: uppercase;
-  color: rgba(201, 168, 76, 0.75);
+  color: #75622F;
   display: block;
   margin-bottom: 32px;
 }
@@ -182,7 +182,7 @@
   color: rgba(245, 242, 238, 0.25);
 }
 .kinari-input:focus {
-  border-color: rgba(201, 168, 76, 0.5);
+  border-color: rgba(117, 98, 47, 0.5);
 }
 /* ─── Logo placeholder ─── */
 .logo-placeholder {
@@ -218,7 +218,7 @@
 }
 .nav-overlay-link:hover,
 .nav-overlay-link.active {
-  color: #C9A84C;
+  color: #75622F;
 }
 /* ─── Geometric lines (tech section) ─── */
 .geo-grid {
@@ -230,8 +230,8 @@
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(201,168,76,0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(201,168,76,0.06) 1px, transparent 1px);
+    linear-gradient(rgba(117,98,47,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(117,98,47,0.06) 1px, transparent 1px);
   background-size: 48px 48px;
 }
 .geo-grid::after {

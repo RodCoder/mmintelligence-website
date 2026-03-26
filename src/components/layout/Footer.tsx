@@ -62,7 +62,7 @@ export function Footer(): JSX.Element {
                   transition: 'color 0.3s ease',
                   padding: 0,
                 }}
-                onMouseEnter={(e) => { (e.target as HTMLButtonElement).style.color = 'rgba(201,168,76,0.7)'; }}
+                onMouseEnter={(e) => { (e.target as HTMLButtonElement).style.color = 'rgba(117,98,47,0.7)'; }}
                 onMouseLeave={(e) => { (e.target as HTMLButtonElement).style.color = 'rgba(245,242,238,0.22)'; }}>
                 {link.label}
               </button>

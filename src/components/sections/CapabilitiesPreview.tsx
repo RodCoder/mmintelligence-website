@@ -199,7 +199,7 @@ function CapabilityCard({ cap, onOpen, isMobile }: { cap: Capability; onOpen: ()
           cursor: 'pointer',
           transition: 'color 0.3s ease',
         }}
-        onMouseEnter={(e) => { e.currentTarget.style.color = 'rgba(201,168,76,0.8)'; }}
+        onMouseEnter={(e) => { e.currentTarget.style.color = 'rgba(117,98,47,0.8)'; }}
         onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(245,242,238,0.65)'; }}>
         <span style={{ textDecoration: 'underline' }}>Know more </span>
         <span>→</span>
@@ -220,9 +220,9 @@ function DetailModal({ cap, onClose, isMobile }: { cap: Capability; onClose: () 
         backdropFilter: 'blur(12px)',
         WebkitBackdropFilter: 'blur(12px)',
         display: 'flex',
-        alignItems: isMobile ? 'flex-end' : 'center',
+        alignItems: 'center',
         justifyContent: 'center',
-        padding: isMobile ? '0' : '40px',
+        padding: isMobile ? '16px' : '40px',
         cursor: 'pointer',
       }}>
       <div
@@ -230,7 +230,7 @@ function DetailModal({ cap, onClose, isMobile }: { cap: Capability; onClose: () 
         style={{
           background: '#111111',
           border: '1px solid rgba(245,242,238,0.1)',
-          borderRadius: isMobile ? '12px 12px 0 0' : '2px',
+          borderRadius: isMobile ? '12px' : '2px',
           padding: isMobile ? '32px 24px' : '56px 64px',
           maxWidth: isMobile ? '100%' : '640px',
           width: '100%',
@@ -339,7 +339,7 @@ function DetailModal({ cap, onClose, isMobile }: { cap: Capability; onClose: () 
                   <span style={{
                     position: 'absolute',
                     left: 0,
-                    color: 'rgba(201,168,76,0.5)',
+                    color: 'rgba(117,98,47,0.5)',
                   }}>—</span>
                   {item}
                 </li>
@@ -374,7 +374,7 @@ export function CapabilitiesPreview(): JSX.Element {
     <>
       <section
         style={{
-          padding: isMobile ? '64px 0 48px' : '96px 0 80px',
+          padding: isMobile ? '64px 0' : '128px 0',
           background: 'linear-gradient(180deg, #111111 0%, #0A0A0A 100%)',
         }}>
         <div
@@ -388,7 +388,7 @@ export function CapabilitiesPreview(): JSX.Element {
           <span
             className="section-label"
             data-reveal
-            style={{ marginBottom: '32px' }}>
+            style={{ marginBottom: '32px', fontWeight: 500 }}>
             What we actually do
           </span>
 

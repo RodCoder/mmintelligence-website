@@ -256,7 +256,7 @@ export function MethodologySteps(): JSX.Element {
                   width: '1px',
                   height: i === activeStep ? '28px' : '10px',
                   background: i === activeStep
-                    ? 'rgba(201,168,76,0.8)'
+                    ? 'rgba(117,98,47,0.8)'
                     : 'rgba(245,242,238,0.15)',
                   transition: 'height 0.4s ease, background 0.4s ease',
                 }} />

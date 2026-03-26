@@ -262,7 +262,7 @@ export function Hero(): JSX.Element {
                   left: 0,
                   width: '1px',
                   height: '16px',
-                  background: 'rgba(201,168,76,0.6)'
+                  background: 'rgba(117,98,47,0.6)'
                 }} />
             </div>
           </div>
