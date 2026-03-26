@@ -17,7 +17,7 @@ export function Footer(): JSX.Element {
       }}>
       <div
         style={{
-          maxWidth: '1200px',
+          maxWidth: '100%',
           margin: '0 auto',
           padding: isMobile ? '0 20px' : isTablet ? '0 32px' : '0 56px',
         }}>
