@@ -150,7 +150,7 @@ export function Hero(): JSX.Element {
                 letterSpacing: '-0.03em',
                 marginBottom: isMobile ? '20px' : '28px',
                 maxWidth: '820px',
-                fontSize: isMobile ? 'clamp(32px, 9vw, 48px)' : 'clamp(48px, 6.5vw, 88px)',
+                fontSize: isMobile ? 'clamp(32px, 9vw, 48px)' : 'clamp(48px, 6.5vw, 74px)',
               }}>
               Intelligence for digital and traditional assets
             </h1>
